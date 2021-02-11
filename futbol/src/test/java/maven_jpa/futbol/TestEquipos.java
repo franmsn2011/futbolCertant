@@ -13,7 +13,7 @@ public class TestEquipos {
 
 	@org.junit.Test
 	public void insertEquipo() {
-		System.out.println("TEST INSERTARR");
+		System.out.println("TEST INSERTARRR");
 		ServiceEquipo se = new ServiceEquipo();
 		Equipo e = new Equipo();
 		e.setIdEquipo(2);
