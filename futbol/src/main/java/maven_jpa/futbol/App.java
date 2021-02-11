@@ -16,6 +16,7 @@ import maven_jpa.futbol.services.ServicePosicion;
 public class App {
 	public static void main(String[] args) {
 		System.out.println("Hello World!");
+		
 		int option = 1;
 		while (option != 0) {
 			System.out.println("MENU JUGADORES:");
