@@ -14,8 +14,13 @@ public class DaoJugador {
 	public Jugador saveJugador(Jugador jugador) {
 		EntityManager em = EntityManagerUtil.getEntityManager();
 		if (estaElJugador(jugador.getDni()) == false) {
-			try {
+			try {int id=0;
+				if(findTodasLosJugadores().size()>0) {
+				id=findTodasLosJugadores().get(findTodasLosJugadores().size()-1).getIdjugador()+1;
+			}
+				jugador.setIdjugador(id);
 				em.getTransaction().begin();
+				System.out.println("agregoooo\n--");
 				em.persist(jugador);
 				em.getTransaction().commit();
 			} catch (Exception e) {
@@ -99,9 +104,9 @@ public class DaoJugador {
 		j = em.merge(j);
 		j.setNombre(jugador.getNombre());
 		j.setEdad(jugador.getEdad());
-		j.setEquipo(jugador.getEquipo());
+		//j.setEquipo(jugador.getEquipo());
 		j.setEstadoCivil(jugador.getEstadoCivil());
-		j.setPosicion(jugador.getPosicion());
+		//j.setPosicion(jugador.getPosicion());
 		em.getTransaction().commit();
 		em.close();
 	}

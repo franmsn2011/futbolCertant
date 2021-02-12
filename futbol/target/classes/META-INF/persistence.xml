@@ -7,21 +7,23 @@
 
 	<persistence-unit name="FutbolPU"
 		transaction-type="RESOURCE_LOCAL">
+		  <!--<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>  -->
+       <!-- <exclude-unlisted-classes>false</exclude-unlisted-classes>  -->
 		<!--<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider> -->
-		<class>maven_jpa.futbol.entity.Equipo</class>
-		<class>maven_jpa.futbol.entity.Posicion</class>
+		<!--<provider> org.hibernate.jpa.HibernatePersistenceProvider </provider> <exclude-unlisted-classes> false </exclude-unlisted-classes> -->
+	<class>maven_jpa.futbol.entity.Equipo</class>
+		<class>maven_jpa.futbol.entity.Posicion</class>  
 		<class>maven_jpa.futbol.entity.Jugador</class>
 
 
 		<properties>
 			<property name="javax.persistence.jdbc.url"
-				value="jdbc:h2:./test.db" />
-			<property name="javax.persistence.jdbc.user" value="" />
-			<property name="javax.persistence.jdbc.password" value="" />
+				value="jdbc:oracle:thin:@NABOO2:1521/NABOO12C" />
+			<property name="javax.persistence.jdbc.user" value="CAPACITACIONES_DESA" />
+			<property name="javax.persistence.jdbc.password" value="CAPACITACIONES_DESA" />
 			<property name="javax.persistence.jdbc.driver"
-				value="org.h2.Driver" />
-			<property name="hibernate.dialect"
-				value="org.hibernate.dialect.H2Dialect" />
+				value="oracle.jdbc.OracleDriver" />
+	
 			<property name="hibernate.show_sql" value="true" />
 
 			<!-- This create automatically the DDL of the database's table -->

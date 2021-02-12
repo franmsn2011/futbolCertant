@@ -40,11 +40,14 @@ public class TestPosicion {
 		assertEquals(p.getIdPosicion(), p2.getIdPosicion());
 	}
 
+	
+	
+	
 	@org.junit.Test
 	public void traerPosicion() {
 		ServicePosicion s = new ServicePosicion();
-		Posicion p = s.traerPosicion(2);
-		assertEquals(p.getIdPosicion(), (int) 2L);
+		Posicion p = s.traerPosicion(1);
+		assertEquals(p.getIdPosicion(), (int) 1L);
 	}
 
 	@org.junit.Test

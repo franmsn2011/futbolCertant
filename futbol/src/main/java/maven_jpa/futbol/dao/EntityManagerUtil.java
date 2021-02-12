@@ -17,9 +17,9 @@ public class EntityManagerUtil {
 
 		if (entityManager == null) {
 			// the same in persistence.xml
-
+			System.out.println("se crea coneccion..");
 			EntityManagerFactory emFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT_NAME);
-
+			System.out.println("exitosa");
 			return emFactory.createEntityManager();
 		}
 		return entityManager;

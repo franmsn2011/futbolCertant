@@ -19,17 +19,23 @@ public class TestJugador {
 	public void insertJugadorOk() {
 		ServiceJugador sj = new ServiceJugador();
 		Jugador j = new Jugador();
-		j.setDni(23345828);
+		j.setDni(12358328);
 		j.setEdad(20);
 		ServiceEquipo se = new ServiceEquipo();
-		j.setEquipo(se.traerEquipo(6));
+		j.setEquipo(se.traerEquipo(1));
 		j.setEstadoCivil("Soltero");
-		// j.setIdjugador(2);
 		j.setNombre("Franco");
-		ServicePosicion sp = new ServicePosicion();
-		j.setPosicion(sp.traerPosicion(1));
+		System.out.println("a");
 		Jugador j2 = sj.agregarJugador(j);
+		
+		System.out.println("//jugadores\n" + sj.traerJugadores() + "//");
+		System.out.println("s");
+		ServicePosicion sp = new ServicePosicion();
+		j2.setEdad(12);
 		sj.borrarJugador(j);
+		System.out.println("muestro");
+		System.out.println("//jugadores\n" + sj.traerJugadores() + "//");
+		
 		assertEquals(j.getIdjugador(), j2.getIdjugador());
 	}
 

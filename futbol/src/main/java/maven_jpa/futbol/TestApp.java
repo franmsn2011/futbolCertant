@@ -215,6 +215,7 @@ public class TestApp {
 		String estadoCivil = entradaEscaner.nextLine();
 		System.out.println("Su jugador ya tiene un Equipo\n" + "1_Si" + "2_No");
 		int opcion = entradaEscaner.nextInt();
+		/*
 		if (opcion == 1) {
 			j.setEquipo(traerEquipo());
 		}
@@ -222,6 +223,7 @@ public class TestApp {
 		System.out.println("Estos son los id posibles" + traerListaPosicion().toString());
 		j.setPosicion(traerPosicion());
 		j.setDni(dni);
+		*/
 		j.setEdad(edad);
 		j.setNombre(nombre);
 		j.setEstadoCivil(estadoCivil);
