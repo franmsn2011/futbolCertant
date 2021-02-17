@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Lista de Equipos</title>
+</head>
+<body>	
+	<table border="1">
+		<thead>
+			<tr>
+				<th>id del equipo</th>
+				<th>Nombre</th>
+				<th>Divicion</th>
+				
+			</tr>
+		</thead>
+		<tbody th:each="equipo : ${equipos}">
+			<tr>
+				<th th:text="${equipo.nombre}"> </th>
+				<th th:text="${equipo.idEquipo}"> </th>
+				<th th:text="${equipo.division}"> </th>
+				
+			</tr>
+		
+		</tbody>
+	
+	</table>
+	<br/>
+	<a href="http://localhost:8080/">atras</a>
+	
+</body>
+</html>

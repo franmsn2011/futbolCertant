@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html th="http//:www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Insert title here</title>
+</head>
+<body>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>Nombre</th>
+				<th>id</th>
+				<th>Activo</th>
+				
+			</tr>
+		</thead>
+		<tbody th:each="posicion : ${posiciones}">
+			<tr>
+				<th th:text="${posicion.nombre}"> </th>
+				<th th:text="${posicion.idPosicion}"> </th>
+				<th th:text="${posicion.atrasadoAdelantado}"> </th>
+				
+			</tr>
+		
+		</tbody>
+	
+	</table>
+	<br/>
+	<a href="http://localhost:8080/">atras</a>
+	<!--
+	
+	<form action="#" th:action="@{/posicion/addpos}" th:objet="${poss}" method="post">
+		<p> <input type="text" placeholder="nombre" th:field="*{nombre}"/> </p>
+		
+		<p> <input type="text" placeholder="id" th:field="*{idPosicion}"/> </p>
+		<p> <input type="text" placeholder="adelantado" th:field="*{atrasadoAdelantado}"/> </p>
+		 <input type="submit"  >
+	</form>
+-->
+
+</body>
+</html>
