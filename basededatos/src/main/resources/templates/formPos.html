@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div>
+		<div>
+			<form th:action="@{/posicion/seve}" th:object=${posicion} method="post">
+				<label>ID</label>		
+				<input th:field="*{idPosicion}" type="text" >	
+				<label>nombre</label>		
+				<input th:field="*{nombre}" type="text" >
+				<label>activo</label>		
+				<input th:field="*{atrasadoAdelantado}" type="text" >
+			
+			<input type="submit" value="Guardar">
+			
+			</form>
+		</div>
+	
+	</div>
+</body>
+</html>

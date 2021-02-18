@@ -1,12 +1,18 @@
 package com.example.demo.controller;
 
+import java.util.Optional;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
@@ -28,18 +34,32 @@ public class PosicionController {
 		ModelAndView mav= new ModelAndView("list");
 		mav.addObject("posiciones",posicionService.listAllPosicion());
 		mav.addObject("poss", new Posicion());
-		//request.setAttribute("posiciones", posicionService.listAllPosicion());
-		//request.setAttribute("pos",new Posicion());
 		return mav;
 	}
 
-	@PostMapping("/addpos")
-	public String addPosicion(@ModelAttribute (name="pos")Posicion posicion) {
-		posicionService.addPosicion(posicion);
-		return "redirect:posicion/list";
+	
+	
+	@GetMapping("/new")
+	public String agregar(Model model) {
+		model.addAttribute("posicion", new Posicion());
+		return "formPos";
 	}
-	
-	
+	@PostMapping("/seve")
+	public String save(@Validated Posicion p ,Model model) {
+		posicionService.addPosicion(p);
+		return "redirect:/posicion/";
+	}
+	@GetMapping("/editar/{idPosicion}")
+	public String editar(@PathVariable int idPosicion, Model model) {
+		Optional<Posicion>posicion=posicionService.listarId(idPosicion);
+		model.addAttribute("posicion", posicion);
+		return "formPos";
+	}
+	@GetMapping("/eliminar/{idPosicion}")
+	public String delete(Model model,@PathVariable int idPosicion) {
+		posicionService.delete(idPosicion);
+		return "redirect:/posicion/list";
+	}
 	
 	
 }

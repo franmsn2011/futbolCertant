@@ -1,6 +1,7 @@
 package com.example.demo.service.Impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -25,6 +26,17 @@ public class EquipoServiceImpl implements EquipoService {
 	@Override
 	public Equipo addEquipo(Equipo equipo) {
 		return equipoRepository.save(equipo);
+	}
+
+	@Override
+	public Optional<Equipo> listarId(int id) {
+		return equipoRepository.findById(id);
+	}
+
+	@Override
+	public void delete(int idEquipo) {
+	equipoRepository.deleteById(idEquipo);
+		
 	}
 	
 }

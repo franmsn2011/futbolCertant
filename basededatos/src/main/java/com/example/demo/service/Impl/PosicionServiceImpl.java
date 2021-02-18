@@ -1,6 +1,7 @@
 package com.example.demo.service.Impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,6 +28,18 @@ public class PosicionServiceImpl implements PosicionService {
 		
 		return posicionRepository.save(posicion);
 	}
+
+	@Override
+	public Optional<Posicion> listarId(int id) {
+		return posicionRepository.findById(id);
+	}
+
+	@Override
+	public void delete(int idPosicion) {
+		posicionRepository.deleteById(idPosicion);
+		
+	}
+	
 	
 	
 	
