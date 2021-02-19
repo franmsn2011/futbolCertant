@@ -3,23 +3,63 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Insert title here</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+	crossorigin="anonymous">
+<!-- bootstrap -->
+<!-- JavaScript Bundle with Popper -->
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
+	crossorigin="anonymous"></script>
 </head>
 <body>
-	<div>
-		<div>
-			<form th:action="@{/posicion/seve}" th:object=${posicion} method="post">
-				<label>ID</label>		
-				<input th:field="*{idPosicion}" type="text" >	
-				<label>nombre</label>		
-				<input th:field="*{nombre}" type="text" >
-				<label>activo</label>		
-				<input th:field="*{atrasadoAdelantado}" type="text" >
-			
-			<input type="submit" value="Guardar">
-			
+	<div class="container mt-4">
+		<div class="col-sm-6">
+			<form th:action="@{/posicion/seve}" th:object=${posicion}
+				method="post">
+				<div class="card">
+					<div class="card-header">
+						<h3>Posicion</h3>
+					</div>
+					<div class="card-body">
+						<div class=" mb-3 row form-group">
+							<label  class="col-sm-3 col-form-label" for="idId">ID</label> 
+							<div class="col-sm-9">
+							<input class="form-control" id="idId" th:field="*{idPosicion}" type="text">
+							</div>
+						
+						</div>
+						
+						
+						<div class=" mb-3 row form-group">
+							<label  class="col-sm-3 col-form-label" for="idNombre">nombre</label> 
+							<div class="col-sm-9">
+							<input class="form-control" id="idNombre" th:field="*{nombre}" type="text">
+							</div>
+						
+						</div>
+						
+						
+						<div class=" mb-3 row form-group">
+							
+							<label  class="col-sm-3 col-form-label" for="idActivo">activo</label> 
+							<div class="col-sm-9">
+							<input class="form-control" id="idActivo" th:field="*{atrasadoAdelantado}" type="text">
+							</div>
+						</div>
+					</div>
+					<div class="card-footer">
+									 <input class="btn btn-success" type="submit" value="Guardar">
+					</div>
+					
+				</div>
+
 			</form>
 		</div>
-	
+
 	</div>
 </body>
 </html>

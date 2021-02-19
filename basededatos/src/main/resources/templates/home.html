@@ -26,20 +26,20 @@
 	<div class="d-grid gap-2 col-6 mx-auto">
 		<h1 class="display-1" background="blue" text="red">Futbol</h1>
 
-		<a href="http://localhost:8080/posicion/" class="btn btn-primary" id="id1">lista
+		<a th:href="@{/posicion/list}" class="btn btn-primary" id="id1">lista
 			de posiciones</a> <br /> 
 			<a
-			href="http://localhost:8080/jugador/list" class="btn btn-primary">lista
+			th:href="@{/jugador/list}" class="btn btn-primary">lista
 			de jugadores</a> 
 			
 			<br /> 
-			<a href="http://localhost:8080/equipo/"
+			<a th:href="@{/equipo/list}"
 			class="btn btn-primary">lista de equipos</a> 
 			<br /> 
 			<a th:href="@{/posicion/new}" class="btn btn-info">agregar
 			posicion</a> 
 			<br /> 
-			<a th:href="@{/posicion/new}"
+			<a th:href="@{/jugador/new}"
 			class="btn btn-info">agregar jugador</a> 
 			<br /> 
 			<a th:href="@{/equipo/new}" class="btn btn-info">agregar equipo</a>

@@ -31,6 +31,7 @@ public class EquipoController {
 		mav.addObject("equipos",equipoService.listAllEquipo());
 		return mav;
 	}
+	
 	@GetMapping("/new")
 	public String agregar(Model model) {
 		model.addAttribute("equipo", new Equipo());

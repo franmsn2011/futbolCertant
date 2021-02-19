@@ -22,8 +22,7 @@
 				<th th:text="${posicion.idPosicion}"> </th>
 				<th th:text="${posicion.atrasadoAdelantado}"> </th>
 				<th><a th:href="@{/posicion/editar/}+${posicion.idPosicion}" class="btn btn-warning">editar</a>
-				<a  th:href="@{/posicion/eliminar/}+${posicion.idPosicion}" class="btn btn-danger">Eliminar</a>
-				<!-- <a  th:onclick="'eliminar('+${posicion.idPosicion}+')'" class="btn btn-danger">Eliminar</a> -->	
+				  <a  th:href="@{/posicion/eliminar/}+${posicion.idPosicion}" class="btn btn-danger" id="idEliminar">Eliminar</a>
 				</th>
 			</tr>
 			
@@ -41,6 +40,6 @@
   crossorigin="anonymous"></script>
 <!-- swet alert -->
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script type="../jQuery/funcionees.js"></script>
+<script src="../jQuery/funciones.js"></script>
 </body>
 </html>

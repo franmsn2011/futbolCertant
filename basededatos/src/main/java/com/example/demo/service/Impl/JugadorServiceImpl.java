@@ -1,6 +1,7 @@
 package com.example.demo.service.Impl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -27,6 +28,17 @@ public class JugadorServiceImpl implements JugadorService {
 	public Jugador addJugador(Jugador jugador) {
 		
 		return jugadorRepository.save(jugador);
+	}
+
+	@Override
+	public Optional<Jugador> listarId(int dni) {
+		return jugadorRepository.findById(dni);
+	}
+
+	@Override
+	public void delete(int dni) {
+		jugadorRepository.deleteById(dni);
+		
 	}
 
 	

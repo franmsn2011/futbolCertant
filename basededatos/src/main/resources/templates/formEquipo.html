@@ -24,23 +24,36 @@
 						<h3>Equipo</h3>
 					</div>
 					<div class="card-body">
-						<div class="form-group">
-							<label>ID</label> <input th:field="*{idEquipo}" type="text">
+						<div class="form-group mb-3 row">
+							<label class="col-sm-3 col-form-label" for="idId">ID</label>
+							<div class="col-sm-9">
+							 <input th:field="*{idEquipo}" type="text" class="form-control"
+									id="idId">
+							 </div>
 
 						</div>
-						<div class="form-group">
-							<label>nombre</label> <input th:field="*{nombre}" type="text">
+						<div class="form-group mb-3 row">
+							<label class="col-sm-3 col-form-label" for="idNombre">nombre</label> 
+							<div class="col-sm-9">
+							<input th:field="*{nombre}" type="text" class="form-control"
+									id="idNombre">
+							</div>
 						</div>
 
-						<div class="form-group">
+						<div class="form-group mb-3 row">
 
-							<label>division</label> <input th:field="*{division}" type="text">
+							<label class="col-sm-3 col-form-label" for="idDivision">division</label> 
+							<div class="col-sm-9">
+							<input th:field="*{division}" type="text" class="form-control"
+									id="idDivision">
+							</div>
 						</div>
 
 					</div>
-						<div class="card-footer"></div>
+						<div class="card-footer">
+												<input type="submit" value="Guardar" class="btn btn-success">
+						</div>
 
-						<input type="submit" value="Guardar" class="btn btn-success">
 
 				</div>
 			</form>
