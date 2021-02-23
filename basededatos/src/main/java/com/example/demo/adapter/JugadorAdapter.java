@@ -1,49 +1,18 @@
-package com.example.demo.entity;
-
-import java.io.Serializable;
+package com.example.demo.adapter;
 
 import javax.persistence.Column;
-import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.Table;
 
-
-
-@Table
-@Entity
-public class Jugador implements Serializable{
-	private static final long serialVersionUID = 1L;
-    
-    //@GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="idJugador")
-    private int idjugador;
-    @Column
-    private String nombre;
-	@Id
-    @Column
+public class JugadorAdapter {
+	private int idjugador;
+	private String nombre;
 	private int dni;
-	@Column
 	private int edad;
-	@Column
-	private int posicion;
-	@Column
+	private String posicion;
 	private String estadoCivil;
-	//@ManyToOne (fetch = FetchType.LAZY)
-	//@JoinColumn(name= "equipo")
-	@Column
-	private int equipo;
-	public Jugador(int idjugador, String nombre, int dni, int edad, int posicion, String estadoCivil) {
-		super();
-		this.idjugador = idjugador;
-		this.nombre = nombre;
-		this.dni = dni;
-		this.edad = edad;
-		this.posicion = posicion;
-		this.estadoCivil = estadoCivil;
-
-	}
-	public Jugador(int idjugador, String nombre, int dni, int edad, int posicion, String estadoCivil,
-			int equipo) {
+	private String equipo;
+	public JugadorAdapter(int idjugador, String nombre, int dni, int edad, String posicion, String estadoCivil,
+			String equipo) {
 		super();
 		this.idjugador = idjugador;
 		this.nombre = nombre;
@@ -53,7 +22,7 @@ public class Jugador implements Serializable{
 		this.estadoCivil = estadoCivil;
 		this.equipo = equipo;
 	}
-	public Jugador() {
+	public JugadorAdapter() {
 		super();
 	}
 	public int getIdjugador() {
@@ -80,10 +49,10 @@ public class Jugador implements Serializable{
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
-	public int getPosicion() {
+	public String getPosicion() {
 		return posicion;
 	}
-	public void setPosicion(int posicion) {
+	public void setPosicion(String posicion) {
 		this.posicion = posicion;
 	}
 	public String getEstadoCivil() {
@@ -92,25 +61,23 @@ public class Jugador implements Serializable{
 	public void setEstadoCivil(String estadoCivil) {
 		this.estadoCivil = estadoCivil;
 	}
-	public int getEquipo() {
+	public String getEquipo() {
 		return equipo;
 	}
-	public void setEquipo(int equipo) {
+	public void setEquipo(String equipo) {
 		this.equipo = equipo;
 	}
-	public static long getSerialversionuid() {
-		return serialVersionUID;
-	}
-	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + dni;
 		result = prime * result + edad;
+		result = prime * result + ((equipo == null) ? 0 : equipo.hashCode());
 		result = prime * result + ((estadoCivil == null) ? 0 : estadoCivil.hashCode());
 		result = prime * result + idjugador;
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
+		result = prime * result + ((posicion == null) ? 0 : posicion.hashCode());
 		return result;
 	}
 	@Override
@@ -121,10 +88,15 @@ public class Jugador implements Serializable{
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Jugador other = (Jugador) obj;
+		JugadorAdapter other = (JugadorAdapter) obj;
 		if (dni != other.dni)
 			return false;
 		if (edad != other.edad)
+			return false;
+		if (equipo == null) {
+			if (other.equipo != null)
+				return false;
+		} else if (!equipo.equals(other.equipo))
 			return false;
 		if (estadoCivil == null) {
 			if (other.estadoCivil != null)
@@ -138,14 +110,17 @@ public class Jugador implements Serializable{
 				return false;
 		} else if (!nombre.equals(other.nombre))
 			return false;
-		
+		if (posicion == null) {
+			if (other.posicion != null)
+				return false;
+		} else if (!posicion.equals(other.posicion))
+			return false;
 		return true;
 	}
 	@Override
 	public String toString() {
-		return "Jugador [idjugador=" + idjugador + ", nombre=" + nombre + ", dni=" + dni + ", edad=" + edad
-				+ ", posicion=" + posicion + ", estadoCivil=" + estadoCivil + ", Equipo=" + equipo + "]\n";
+		return "JugadorAdapter [idjugador=" + idjugador + ", nombre=" + nombre + ", dni=" + dni + ", edad=" + edad
+				+ ", posicion=" + posicion + ", estadoCivil=" + estadoCivil + ", equipo=" + equipo + "]";
 	}
-
 	
 }

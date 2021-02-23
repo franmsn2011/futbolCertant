@@ -2,16 +2,20 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+<title>Listado de jugadores</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
+	crossorigin="anonymous">
 <!-- jQuery -->
-<script
-    src="https://code.jquery.com/jquery-3.3.1.min.js"
-    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
-    crossorigin="anonymous">
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous">
   </script>
+
 </head>
-<body background="blue">
+<body>
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -22,37 +26,38 @@
 				<th>Posicion</th>
 				<th>Estado Civil</th>
 				<th>Equipo</th>
-				
+
 			</tr>
 		</thead>
 		<tbody th:each="jugador : ${jugadores}" class="table-striped">
 			<tr>
-				<th th:text="${jugador.idjugador}"> </th>
-				<th th:text="${jugador.nombre}"> </th>
-				<th th:text="${jugador.dni}"> </th>
-				<th th:text="${jugador.edad}"> </th>
-				<th th:text="${jugador.posicion}"> </th>
-				<th th:text="${jugador.estadoCivil}"> </th>
-				<th th:text="${jugador.equipo}"> </th>				
-				<th><a th:href="@{/jugador/editar/}+${jugador.dni}" class="btn btn-warning">Editar</a>
-				<a  th:href="@{/jugador/eliminar/}+${jugador.dni}" class="btn btn-danger">Eliminar</a>
-				
+				<th th:text="${jugador.idjugador}"></th>
+				<th th:text="${jugador.nombre}"></th>
+				<th th:text="${jugador.dni}"></th>
+				<th th:text="${jugador.edad}"></th>
+				<th th:text="${jugador.posicion}"></th>
+				<th th:text="${jugador.estadoCivil}"></th>
+				<th th:text="${jugador.equipo}"></th>
+				<th><a th:href="@{/jugador/editar/}+${jugador.dni}"
+					class="btn btn-warning">Editar</a> <a
+					th:href="@{/jugador/eliminar/}+${jugador.dni}"
+					class="btn btn-danger">Eliminar</a>
 			</tr>
-		
+
 		</tbody>
-	
+
 	</table>
-	<br/>
-	
-	
-	
-	<div background="blue" class="position-absolute" >
-		<img id="idjuga" src="https://www.marketingregistrado.com/img/noticias/top-ten-salarios.jpg">
-			
-		<a class="btn btn-success position-absolute" href="http://localhost:8080/">atras</a>
-	
+	<br />
+
+
+
+	<div>
+		<img id="idjuga"
+			src="https://www.marketingregistrado.com/img/noticias/top-ten-salarios.jpg">
+
+		<a class="btn btn-success" href="http://localhost:8080/">atras</a>
+
 	</div>
-	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-	<script src="../jQuery/jugadores.js"></script>
+
 </body>
 </html>
