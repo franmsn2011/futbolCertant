@@ -60,6 +60,10 @@ public class PosicionController {
 		posicionService.delete(idPosicion);
 		return "redirect:/posicion/list";
 	}
-	
+	@GetMapping({"/error"})
+	public String error() {
+		
+		return "redirect:/posicion/new";
+	}
 	
 }

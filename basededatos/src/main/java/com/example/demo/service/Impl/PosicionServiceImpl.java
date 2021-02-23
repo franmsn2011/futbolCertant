@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Posicion;
+import com.example.demo.excepcion.PosicionExistenteException;
 import com.example.demo.repository.PosicionRepository;
 import com.example.demo.service.PosicionService;
 
@@ -26,6 +27,11 @@ public class PosicionServiceImpl implements PosicionService {
 	@Override
 	public Posicion addPosicion(Posicion posicion) {
 		
+		if(!posicionRepository.findById(posicion.getIdPosicion()).isEmpty()) {
+			throw new PosicionExistenteException("no se puede agregar esa posicion porque ya existe");
+			
+		}
+		System.out.println("--------------------------------");
 		return posicionRepository.save(posicion);
 	}
 
