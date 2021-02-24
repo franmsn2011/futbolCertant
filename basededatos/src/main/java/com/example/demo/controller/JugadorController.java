@@ -41,15 +41,22 @@ public class JugadorController {
 	public ModelAndView listAllJugador() {
 		List<JugadorAdapter> listJugadorAdapter=new ArrayList<JugadorAdapter>();
 		List<Jugador> listJugador=jugadorService.listAllJugador();
-		System.out.println(listJugador.toString());
 		Jugador aux=new Jugador();
 		for(int i=0; i < listJugador.size() ; i++) {
 			 aux=listJugador.get(i);
+			 String e="Ninguno";
+			 if(aux.getEquipo()!=0) {
+				 e=EquipoService.listarId(aux.getEquipo()).get().getNombre();
+			 }
+			 String p="Ninguna";
+			 if(aux.getPosicion()!=0) {
+				 p=posicionService.listarId(aux.getPosicion()).get().getNombre();
+			 }
 			 listJugadorAdapter.add(new JugadorAdapter(aux.getIdjugador(),
 					 aux.getNombre(),aux.getDni(),aux.getEdad(),
-					 posicionService.listarId(aux.getPosicion()).get().getNombre(),
+					 p,
 					 aux.getEstadoCivil(),
-					 EquipoService.listarId(aux.getEquipo()).get().getNombre()));
+					 e));
 		}
 		ModelAndView mav =new ModelAndView("listJugadores");
 		mav.addObject("jugadores",listJugadorAdapter);
@@ -64,12 +71,19 @@ public class JugadorController {
 	}
 	@PostMapping("/seve")
 	public String seve(@Validated Jugador j,Model model) {
-		jugadorService.addJugador(j);
+		try {
+			jugadorService.addJugador(j);
+		} catch (Exception e) {
+			model.addAttribute("exception", e.getMessage());
+			return "formJugador";
+		}
+		
 		return "redirect:/jugador/list/";
 	}
 	@GetMapping("/editar/{dni}")
 	public String editar(@PathVariable int dni,Model model) {
 		Optional<Jugador> jugador=jugadorService.listarId(dni);
+		jugadorService.delete(dni);
 		model.addAttribute("jugador", jugador);
 		return "formJugador";
 	}

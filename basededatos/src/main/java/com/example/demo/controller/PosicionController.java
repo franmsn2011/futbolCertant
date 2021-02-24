@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.entity.Posicion;
+import com.example.demo.excepcion.PosicionExistenteException;
+import com.example.demo.excepcion.PosicionNombreIgualException;
 import com.example.demo.service.PosicionService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -37,21 +39,41 @@ public class PosicionController {
 		return mav;
 	}
 	
+	@GetMapping("/edit/")
+	public String e(Model model) {
+		posicionService.setUserInfoById("juan", false, 15);
+		return "redirect:/posicion/list";
+	}
 	
-	
-	@GetMapping("/new")
+	@GetMapping("/new/")
 	public String agregar(Model model) {
 		model.addAttribute("posicion", new Posicion());
+		return "formPos";
+	}@GetMapping("/new/{excepcion}")
+	public String agregarex(@PathVariable String excepcion,Model model) {
+		model.addAttribute("posicion", new Posicion());
+		model.addAttribute("excepcion", excepcion);
 		return "formPos";
 	}
 	@PostMapping("/seve")
 	public String save(@Validated Posicion p ,Model model) {
-		posicionService.addPosicion(p);
+		try {
+			posicionService.addPosicion(p);
+			
+		} catch (Exception e) {
+			model.addAttribute("excepcion", e.getMessage());
+			return "formPos";
+			/*
+			System.out.println(e.getMessage());
+			return "redirect:/posicion/new/"+e.getMessage();
+		*/
+		}
 		return "redirect:/posicion/";
 	}
 	@GetMapping("/editar/{idPosicion}")
 	public String editar(@PathVariable int idPosicion, Model model) {
 		Optional<Posicion>posicion=posicionService.listarId(idPosicion);
+		posicionService.delete(idPosicion);
 		model.addAttribute("posicion", posicion);
 		return "formPos";
 	}

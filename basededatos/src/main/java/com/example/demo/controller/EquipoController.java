@@ -31,7 +31,11 @@ public class EquipoController {
 		mav.addObject("equipos",equipoService.listAllEquipo());
 		return mav;
 	}
-	
+	@GetMapping("/edit/")
+	public String e(Model model) {
+		equipoService.setUserInfoById("juan", "segunda", 15);
+		return "redirect:/equipo/list";
+	}
 	@GetMapping("/new")
 	public String agregar(Model model) {
 		model.addAttribute("equipo", new Equipo());
@@ -39,7 +43,13 @@ public class EquipoController {
 	}
 	@PostMapping("/seve")
 	public String seve(@Validated Equipo e,Model model) {
-		equipoService.addEquipo(e);
+		try {
+			equipoService.addEquipo(e);
+			
+		} catch (Exception e2) {
+			model.addAttribute("excepcion", e2.getMessage());
+			return "formEquipo";
+		}
 		return "redirect:/equipo/list/";
 	}
 	@GetMapping("/editar/{idEquipo}")
