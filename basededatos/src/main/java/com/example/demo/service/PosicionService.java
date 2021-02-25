@@ -18,7 +18,9 @@ public interface PosicionService {
 	public abstract Optional<Posicion> listarId(int id);
 	public abstract void delete(int idPosicion);
 	
+	//public abstract Optional<Posicion> listarJugadoresPosicion(int idPosicion);
+	
 	@Modifying
-	@Query("update Posicion p set p.nombre = ?1, u.activo = ?2 where u.id_Posicion = ?3")
+	@Query("update Posicion p set p.nombre = ?1, u.ATRASADO_ADELANTADO = ?2 where u.ID_POSICION = ?3")
 	void setUserInfoById(String nombre, boolean activo, int id_Posicion);
 }

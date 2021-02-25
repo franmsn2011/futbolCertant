@@ -5,6 +5,7 @@ import java.util.Optional;
 
 import javax.persistence.Index;
 
+import org.hibernate.criterion.Example;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -30,26 +31,25 @@ public class PosicionServiceImpl implements PosicionService {
 
 	@Override
 	public Posicion addPosicion(Posicion posicion) {
-		if (!posicionRepository.findById(posicion.getIdPosicion()).isEmpty()) {
-			throw new PosicionExistenteException(
-					"no se puede agregar esa posicion porque ya existe una posicion con ese id");
+		int index = 0;
+		List<Posicion> list = posicionRepository.findAll();
+		while (index < posicionRepository.findAll().size()) {
+			if (list.get(index).getNombre().equalsIgnoreCase(posicion.getNombre())) {
+				if (list.get(index).isAtrasadoAdelantado() == posicion.isAtrasadoAdelantado()) {
+					throw new PosicionNombreIgualException(
+							"ya hay una posicion con esos datos, por favor intente otra ves");
 
-		} else {
-			int index = 0;
-			List<Posicion> list = posicionRepository.findAll();
-			while (index < posicionRepository.findAll().size()) {
-				if (list.get(index).getNombre().equalsIgnoreCase(posicion.getNombre())) {
-					throw new PosicionNombreIgualException("No se puede poner un nombre con un nombre de otra posicion");
 				}
-				index++;
 			}
+			index++;
 		}
+
 		return posicionRepository.save(posicion);
 	}
 
 	@Override
-	public Optional<Posicion> listarId(int id) {
-		return posicionRepository.findById(id);
+	public Optional<Posicion> listarId(int idPosicion) {
+		return posicionRepository.findById(idPosicion);
 	}
 
 	@Override
@@ -61,7 +61,15 @@ public class PosicionServiceImpl implements PosicionService {
 	@Override
 	public void setUserInfoById(String nombre, boolean activo, int id_Posicion) {
 		// TODO Auto-generated method stub
-		
+
 	}
+/*
+	@Override
+	public Optional<Posicion> listarJugadoresPosicion(int idPosicion) {
+		 Example<Posicion> example = new Example.of(new Posicion("delantero",true,1));
+
+		    Optional<Posicion> actual = posicionRepository.findOne(example);
+		return null;
+	}*/
 
 }

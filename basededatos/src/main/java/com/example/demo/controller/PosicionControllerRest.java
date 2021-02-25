@@ -36,8 +36,6 @@ public class PosicionControllerRest {
 	@GetMapping("/traer/{idPosicion}")
 	public Optional<Posicion> editar(@PathVariable int idPosicion, Model model) {
 		Optional<Posicion>po=posicionService.listarId(idPosicion);
-		System.out.println("-------------------");
-		System.out.println(po.get().toString());
 		return po;
 	}
 }

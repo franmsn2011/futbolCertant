@@ -1,5 +1,6 @@
 package com.example.demo.controller;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.h2.util.New;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.entity.Jugador;
 import com.example.demo.entity.Posicion;
 import com.example.demo.excepcion.PosicionExistenteException;
 import com.example.demo.excepcion.PosicionNombreIgualException;
+import com.example.demo.service.JugadorService;
 import com.example.demo.service.PosicionService;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,6 +32,10 @@ public class PosicionController {
 	@Autowired
 	@Qualifier("PosicionService")
 	private PosicionService posicionService;
+	@Autowired
+	@Qualifier("JugadorService")
+	private JugadorService jugadorService;
+	
 	
 	@GetMapping({"/","","/list"})
 	public ModelAndView listAllPosicion() {
@@ -38,6 +45,11 @@ public class PosicionController {
 		mav.addObject("poss", new Posicion());
 		return mav;
 	}
+	
+	
+	
+	
+	
 	
 	@GetMapping("/edit/")
 	public String e(Model model) {
@@ -63,17 +75,13 @@ public class PosicionController {
 		} catch (Exception e) {
 			model.addAttribute("excepcion", e.getMessage());
 			return "formPos";
-			/*
-			System.out.println(e.getMessage());
-			return "redirect:/posicion/new/"+e.getMessage();
-		*/
+			
 		}
 		return "redirect:/posicion/";
 	}
 	@GetMapping("/editar/{idPosicion}")
 	public String editar(@PathVariable int idPosicion, Model model) {
 		Optional<Posicion>posicion=posicionService.listarId(idPosicion);
-		posicionService.delete(idPosicion);
 		model.addAttribute("posicion", posicion);
 		return "formPos";
 	}
@@ -82,10 +90,6 @@ public class PosicionController {
 		posicionService.delete(idPosicion);
 		return "redirect:/posicion/list";
 	}
-	@GetMapping({"/error"})
-	public String error() {
-		
-		return "redirect:/posicion/new";
-	}
+	
 	
 }

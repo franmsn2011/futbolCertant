@@ -31,10 +31,11 @@
 						<h4 class="text-danger" role="alert" th:text=${excepcion}></h4>
 					</div>
 					<div class="card-body">
+						
 						<div class=" mb-3 row form-group">
 							<label  class="col-sm-3 col-form-label" for="idId">ID</label> 
 							<div class="col-sm-9">
-							<input class="form-control" id="btp" th:field="*{idPosicion}" type="text">
+							<input class="form-control" id="btp" th:field="*{idPosicion}"  readonly="readonly" type="text">
 							</div>
 						
 						</div>

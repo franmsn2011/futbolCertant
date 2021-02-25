@@ -17,6 +17,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.adapter.JugadorAdapter;
 import com.example.demo.entity.Jugador;
+import com.example.demo.entity.Posicion;
 import com.example.demo.service.EquipoService;
 import com.example.demo.service.JugadorService;
 import com.example.demo.service.PosicionService;
@@ -64,6 +65,22 @@ public class JugadorController {
 		return mav;
 	}
 	
+	@GetMapping("/verJugadores/{idPosicion}/{idEquipo}")
+	public ModelAndView verJugadores(@PathVariable int idPosicion,@PathVariable int idEquipo,Model model) {
+		List<Jugador> listJuga = jugadorService.listarJugadoresxP(idPosicion,idEquipo);
+		System.out.println(listJuga);
+		String respuesta;
+		if(idEquipo!=0) {
+			respuesta="Estos son los jugadores que jugan en el equipo "+EquipoService.listarId(idEquipo).get().getNombre();
+		}else {
+			respuesta="Estos son los jugadores que tiene la posicion "+posicionService.listarId(idPosicion).get().getNombre();
+		}
+		ModelAndView mav= new ModelAndView("jugadoresXposicion");
+		mav.addObject("respuesta", respuesta);
+		mav.addObject("jugadores",listJuga);
+		return mav;
+	}
+	
 	@GetMapping("/new")
 	public String agregar(Model model) {		
 		model.addAttribute("jugador", new Jugador());
@@ -80,18 +97,18 @@ public class JugadorController {
 		
 		return "redirect:/jugador/list/";
 	}
-	@GetMapping("/editar/{dni}")
-	public String editar(@PathVariable int dni,Model model) {
-		Optional<Jugador> jugador=jugadorService.listarId(dni);
-		jugadorService.delete(dni);
+	@GetMapping("/editar/{idJugador}")
+	public String editar(@PathVariable int idJugador,Model model) {
+		Optional<Jugador> jugador=jugadorService.listarId(idJugador);
 		model.addAttribute("jugador", jugador);
 		return "formJugador";
 	}
-	@GetMapping("/eliminar/{dni}")
-	public String delete(Model model,@PathVariable int dni) {
-		jugadorService.delete(dni);
+	@GetMapping("/eliminar/{idJugador}")
+	public String delete(Model model,@PathVariable int idJugador) {
+		jugadorService.delete(idJugador);
 		return "redirect:/jugador/list";
 	}
+	
 	
 	
 	

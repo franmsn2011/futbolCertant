@@ -1,5 +1,7 @@
 package com.example.demo.service.Impl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,32 +23,31 @@ public class EquipoServiceImpl implements EquipoService {
 	@Autowired
 	@Qualifier("equipoRepository")
 	private EquipoRepository equipoRepository;
-	
+
 	@Override
 	public List<Equipo> listAllEquipo() {
-		return equipoRepository.findAll();
+		List<Equipo> list = equipoRepository.findAll();
+		list.remove(new Equipo(15,"ninguno","ninguna"));
+		return list;
 	}
 
 	@Override
 	public Equipo addEquipo(Equipo equipo) {
-		if (!equipoRepository.findById(equipo.getIdEquipo()).isEmpty()) {
-			throw new EquipoExistenteException(
-					"no se puede agregar esa equipo porque ya existe un equipo con ese id");
 
-		}else {
-			int index = 0;
-			List<Equipo> list = equipoRepository.findAll();
-			while (index < equipoRepository.findAll().size()) {
-				if (list.get(index).getNombre().equalsIgnoreCase(equipo.getNombre())) {
-					if (list.get(index).getDivision().equalsIgnoreCase(equipo.getDivision())) {					
-					throw new EquipoErrorDatosIguales("No se puede agregar ese equipo porque ya hay un equipo con esos datos");
-				
-					}	
+		int index = 0;
+		List<Equipo> list = listAllEquipo();
+		while (index < list.size()) {
+			if (list.get(index).getNombre().equalsIgnoreCase(equipo.getNombre())) {
+				if (list.get(index).getDivision().equalsIgnoreCase(equipo.getDivision())) {
+					throw new EquipoErrorDatosIguales(
+							"No se puede agregar ese equipo porque ya hay un equipo con esos datos");
+
 				}
-				index++;
 			}
+			index++;
 		}
-		return equipoRepository.saveAndFlush(equipo);
+
+		return equipoRepository.save(equipo);
 	}
 
 	@Override
@@ -56,16 +57,15 @@ public class EquipoServiceImpl implements EquipoService {
 
 	@Override
 	public void delete(int idEquipo) {
-	equipoRepository.deleteById(idEquipo);
-		
+		equipoRepository.deleteById(idEquipo);
+
 	}
-	
+
 	@Override
 	@Modifying
 	@Query("update EQUIPO e set e.division='juann' ,e.nombre = 'funciona' where  e.id_equipo ='15'")
 	public void setUserInfoById(String nombre, String divicion, int id_equipo) {
-	
-		
+
 	}
-	
+
 }

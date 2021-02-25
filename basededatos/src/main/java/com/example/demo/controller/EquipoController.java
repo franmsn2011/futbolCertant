@@ -15,8 +15,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.entity.Equipo;
 import com.example.demo.service.EquipoService;
-
-import oracle.jdbc.proxy.annotation.Post;
+import com.example.demo.service.JugadorService;
 
 @Controller
 @RequestMapping("/equipo")
@@ -24,6 +23,10 @@ public class EquipoController {
 	@Autowired
 	@Qualifier("EquipoService")
 	private EquipoService equipoService;
+	
+	@Autowired
+	@Qualifier("JugadorService")
+	private JugadorService jugadorService;
 	
 	@GetMapping({"/","","/list"})
 	public ModelAndView listAllEquipo() {
@@ -60,6 +63,7 @@ public class EquipoController {
 	}
 	@GetMapping("/eliminar/{idEquipo}")
 	public String delete(Model model,@PathVariable int idEquipo) {
+		jugadorService.EliminaEquipoDeJugadores(idEquipo);
 		equipoService.delete(idEquipo);
 		return "redirect:/equipo/list";
 	}

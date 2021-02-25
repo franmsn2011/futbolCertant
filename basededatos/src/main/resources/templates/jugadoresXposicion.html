@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Listado de jugadores</title>
+<title>Insert title here</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -16,6 +16,7 @@
 
 </head>
 <body>
+	<h1 th:text="${respuesta}" class="card-title"></h1>
 	<table class="table table-striped">
 		<thead>
 			<tr>
@@ -31,16 +32,16 @@
 		</thead>
 		<tbody th:each="jugadorAdapter : ${jugadores}" class="table-striped">
 			<tr>
-				<th th:text="${jugadorAdapter.idjugador}"></th>
+				<th th:text="${jugadorAdapter.nombre}"></th>
 				<th th:text="${jugadorAdapter.nombre}"></th>
 				<th th:text="${jugadorAdapter.dni}"></th>
 				<th th:text="${jugadorAdapter.edad}"></th>
 				<th th:text="${jugadorAdapter.posicion}"></th>
 				<th th:text="${jugadorAdapter.estadoCivil}"></th>
 				<th th:text="${jugadorAdapter.equipo}"></th>
-				<th><a th:href="@{/jugador/editar/}+${jugadorAdapter.idjugador}"
+				<th><a th:href="@{/jugador/editar/}+${jugadorAdapter.edad}"
 					class="btn btn-warning">Editar</a> <a
-					th:href="@{/jugador/eliminar/}+${jugadorAdapter.idjugador}"
+					th:href="@{/jugador/eliminar/}+${jugadorAdapter.edad}"
 					class="btn btn-danger">Eliminar</a>
 			</tr>
 
@@ -52,10 +53,7 @@
 
 
 	<div>
-		<img id="idjuga"
-			src="https://www.marketingregistrado.com/img/noticias/top-ten-salarios.jpg">
-
-		<a class="btn btn-success" href="http://localhost:8080/">atras</a>
+		<a class="btn btn-success  btn-lg btn-block" th:href="@{/}">volver al menu principal</a>
 
 	</div>
 
