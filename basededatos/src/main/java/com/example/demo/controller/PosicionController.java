@@ -73,6 +73,7 @@ public class PosicionController {
 			posicionService.addPosicion(p);
 			
 		} catch (Exception e) {
+			System.out.println(e.getClass().toString());
 			model.addAttribute("excepcion", e.getMessage());
 			return "formPos";
 			
@@ -87,6 +88,7 @@ public class PosicionController {
 	}
 	@GetMapping("/eliminar/{idPosicion}")
 	public String delete(Model model,@PathVariable int idPosicion) {
+		jugadorService.EliminaPosicionDeJugadores(idPosicion);
 		posicionService.delete(idPosicion);
 		return "redirect:/posicion/list";
 	}

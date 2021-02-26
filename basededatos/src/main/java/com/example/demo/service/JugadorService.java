@@ -15,10 +15,11 @@ public interface JugadorService {
 	
 	public abstract Optional<Jugador> listarId(int idJugador);
 	
-	@Query("select * from JUGADOR J where J.POSICION = ?26 ")
 	public abstract List<Jugador> listarJugadoresxP(int idPosicion,int idEquipo);
 	
 	public abstract void delete(int idJugador);
 	
 	public void EliminaEquipoDeJugadores(int idEquipo);
+	
+	public void EliminaPosicionDeJugadores(int idPosicion);
 }

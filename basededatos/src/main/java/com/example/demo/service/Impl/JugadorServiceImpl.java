@@ -74,16 +74,41 @@ public class JugadorServiceImpl implements JugadorService {
 	public List<Jugador> listarJugadoresxP(int idPosicion,int idEquipo){
  		Jugador jugador= new Jugador();
  		Example<Jugador> example;
- 		if(idEquipo==0) {
- 		jugador.setPosicion(idPosicion);
- 		 ExampleMatcher ignoringExampleMatcher = ExampleMatcher.matchingAny()
- 			      .withIgnorePaths("id_jugador","nombre","estadoCivil","dni","edad","equipo");
- 		example = Example.of(jugador,ignoringExampleMatcher);
- 		}else {
- 			jugador.setEquipo(idEquipo);
- 	 		 ExampleMatcher ignoringExampleMatcher = ExampleMatcher.matchingAny()
- 	 			 .withIgnorePaths("id_jugador","nombre","estadoCivil","dni","edad","posicion");
- 	 	example = Example.of(jugador,ignoringExampleMatcher);
+ 		ExampleMatcher ignoringExampleMatcher;
+ 		if(idPosicion==0 && idEquipo==0 || idPosicion!=0 && idEquipo!=0) {
+ 			if(idPosicion==0 && idEquipo==0) {
+
+ 	 			//jugador.setEquipo(15);
+ 	 			jugador.setPosicion(24);
+ 	 			ignoringExampleMatcher = ExampleMatcher.matchingAny()
+ 		 			      .withIgnorePaths("id_jugador","nombre","dni","edad","estadoCivil","equipo");
+ 		 		example = Example.of(jugador,ignoringExampleMatcher);
+ 		 		System.out.println(jugadorRepository.findAll());
+ 		 		System.out.println(jugadorRepository.findAll(example));
+ 		 		System.out.println("-------------------");
+ 		 		
+ 			}else {
+ 				jugador.setPosicion(idPosicion);
+ 	 			jugador.setEquipo(idEquipo);
+ 		 		ignoringExampleMatcher = ExampleMatcher.matchingAny()
+ 		 			      .withIgnorePaths("id_jugador","nombre","estadoCivil","dni","edad");
+ 		 		example = Example.of(jugador,ignoringExampleMatcher);
+ 		 		
+ 			}
+ 				
+ 		}else { if(idEquipo!=0 && idPosicion==0) {
+ 	 		jugador.setEquipo(idEquipo);
+ 	 		jugador.setPosicion(24);
+ 	 		ignoringExampleMatcher = ExampleMatcher.matchingAny()
+ 	 			      .withIgnorePaths("id_jugador","nombre","estadoCivil","dni","edad");
+ 	 		example = Example.of(jugador,ignoringExampleMatcher);
+ 	 		}else {
+ 	 			jugador.setEquipo(15);
+ 	 			jugador.setPosicion(idPosicion);
+ 	 	 		ignoringExampleMatcher = ExampleMatcher.matchingAny()
+ 	 	 			 .withIgnorePaths("id_jugador","nombre","estadoCivil","dni","edad");
+ 	 	 	example = Example.of(jugador,ignoringExampleMatcher);
+ 	 		}
  		}
  		
  		return jugadorRepository.findAll(example);	
@@ -102,6 +127,23 @@ public class JugadorServiceImpl implements JugadorService {
 		for (int j = 0; j < listJugadoresAMdificar.size(); j++) {
 			aux=listJugadoresAMdificar.get(j);
 			aux.setEquipo(15);
+			addJugador(aux);
+		}
+		
+	}@Override
+	public void EliminaPosicionDeJugadores(int idPosicion) {
+		List<Jugador> listJugadores= listAllJugador();
+		List<Jugador> listJugadoresAMdificar=new ArrayList<Jugador>();
+		for (int i =0; i<listJugadores.size(); i++) {
+				if(listJugadores.get(i).getPosicion()==idPosicion) {
+					listJugadoresAMdificar.add(listJugadores.get(i));
+				}
+			}
+		Jugador aux;
+		for (int j = 0; j < listJugadoresAMdificar.size(); j++) {
+			aux=listJugadoresAMdificar.get(j);
+			//seteo la posicion del jugador a el id de de la posicion null
+			aux.setPosicion(24);
 			addJugador(aux);
 		}
 		

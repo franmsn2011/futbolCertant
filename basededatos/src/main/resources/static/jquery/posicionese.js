@@ -1,14 +1,27 @@
 $(document).ready(function() {
 	console.log(3);
-	
+	$("#btp").click(function() {
+		console.log(33);
+		var nom=document.getElementById("idNombre").value;
+		
+		if(nom!=""){
+		return OK;
+		}
+		var datoss = document.getElementById("idExc");
+		datoss.innerHTML= `Error el dato no puede ser nulo
+  		
+  	`;
+		alert("El nombre no puede ser nulo");
+		return false;
 	});
-$('#btp').on('click', function() {
-	console.log(1);
-	});
+
+});
+
+
 
 
 $('#btpos').on('click', function() {
-console.log(1);
+	console.log(1);
 	$.ajax({
 		data: { id: 123 },
 		type: 'GET',

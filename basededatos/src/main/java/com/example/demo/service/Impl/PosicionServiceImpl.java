@@ -25,15 +25,16 @@ public class PosicionServiceImpl implements PosicionService {
 
 	@Override
 	public List<Posicion> listAllPosicion() {
-
-		return posicionRepository.findAll();
+		List<Posicion> list=posicionRepository.findAll();
+		list.remove(new Posicion(24,"Ninguno",false));
+		return list;
 	}
 
 	@Override
 	public Posicion addPosicion(Posicion posicion) {
 		int index = 0;
-		List<Posicion> list = posicionRepository.findAll();
-		while (index < posicionRepository.findAll().size()) {
+		List<Posicion> list =listAllPosicion();
+		while (index < list.size()) {
 			if (list.get(index).getNombre().equalsIgnoreCase(posicion.getNombre())) {
 				if (list.get(index).isAtrasadoAdelantado() == posicion.isAtrasadoAdelantado()) {
 					throw new PosicionNombreIgualException(

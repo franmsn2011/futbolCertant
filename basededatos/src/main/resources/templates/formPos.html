@@ -23,19 +23,19 @@
 <body>
 	<div class="container mt-4">
 		<div class="col-sm-6">
-			<form th:action="@{/posicion/seve}" th:object=${posicion}
+			<form name="formPosicion" th:action="@{/posicion/seve}" th:object=${posicion}
 				method="post">
 				<div class="card">
 					<div class="card-header">
 						<h3>Posicion</h3>
-						<h4 class="text-danger" role="alert" th:text=${excepcion}></h4>
+						<h4 id="idExc"class="text-danger" role="alert" th:text=${excepcion}></h4>
 					</div>
 					<div class="card-body">
 						
 						<div class=" mb-3 row form-group">
 							<label  class="col-sm-3 col-form-label" for="idId">ID</label> 
 							<div class="col-sm-9">
-							<input class="form-control" id="btp" th:field="*{idPosicion}"  readonly="readonly" type="text">
+							<input class="form-control" th:field="*{idPosicion}"  readonly="readonly" type="text">
 							</div>
 						
 						</div>
@@ -68,7 +68,8 @@
 						</div>
 					</div>
 					<div class="card-footer">
-									 <input id="btpos" class="btn btn-success" type="submit" value="Guardar">
+													
+									 <button id="btp" class="btn btn-success">Guardar</button>
 					</div>
 					
 				</div>
@@ -77,5 +78,6 @@
 		</div>
 
 	</div>
+	
 </body>
 </html>
