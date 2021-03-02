@@ -27,7 +27,7 @@
 				<th th:text="${equipo.division}"> </th>
 				<th><a th:href="@{/equipo/editar/}+${equipo.idEquipo}" class="btn btn-warning">Editar</a>
 				<a  th:href="@{/equipo/eliminar/}+${equipo.idEquipo}" class="btn btn-danger">Eliminar</a>
-				<a  th:href="@{/jugador/verJugadores/}+${0}+'/'+${equipo.idEquipo}" class="btn btn-primary">Ver Jugadores que jugan en este equipo</a>
+				<a  th:href="@{/jugador/verJugadores/}+${-1}+'/'+${equipo.idEquipo}" class="btn btn-primary">Ver Jugadores que jugan en este equipo</a>
 				
 			</tr>
 		

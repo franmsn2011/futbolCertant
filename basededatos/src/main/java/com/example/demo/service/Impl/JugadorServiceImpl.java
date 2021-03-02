@@ -34,15 +34,12 @@ public class JugadorServiceImpl implements JugadorService {
 	@Override
 	public Jugador addJugador(Jugador jugador) {
 		/*
-		int index = 0;
-		List<Jugador> list = jugadorRepository.findAll();
-		while (index < jugadorRepository.findAll().size()) {
-			if (list.get(index).getIdjugador() == jugador.getIdjugador()) {
-				throw new JugadorExistenteException(
-						"No se puede agregar este jugador porque ya hay otro con el id " + jugador.getIdjugador());
-			}
-			index++;
-		}*/
+		 * int index = 0; List<Jugador> list = jugadorRepository.findAll(); while (index
+		 * < jugadorRepository.findAll().size()) { if (list.get(index).getIdjugador() ==
+		 * jugador.getIdjugador()) { throw new JugadorExistenteException(
+		 * "No se puede agregar este jugador porque ya hay otro con el id " +
+		 * jugador.getIdjugador()); } index++; }
+		 */
 		if (jugador.getEstadoCivil().equalsIgnoreCase("Viudo") == true
 				|| jugador.getEstadoCivil().equalsIgnoreCase("Divorciado") == true
 				|| jugador.getEstadoCivil().equalsIgnoreCase("Soltero") == true
@@ -66,86 +63,117 @@ public class JugadorServiceImpl implements JugadorService {
 
 	}
 
+	@Override
+	// @Query("select * from JUGADOR J where J.POSICION = ?26 ")
 
-	
- 	@Override
-	//@Query("select * from JUGADOR J where J.POSICION = ?26 ")
- 	
-	public List<Jugador> listarJugadoresxP(int idPosicion,int idEquipo){
- 		Jugador jugador= new Jugador();
- 		Example<Jugador> example;
- 		ExampleMatcher ignoringExampleMatcher;
- 		if(idPosicion==0 && idEquipo==0 || idPosicion!=0 && idEquipo!=0) {
- 			if(idPosicion==0 && idEquipo==0) {
-
- 	 			//jugador.setEquipo(15);
- 	 			jugador.setPosicion(24);
- 	 			ignoringExampleMatcher = ExampleMatcher.matchingAny()
- 		 			      .withIgnorePaths("id_jugador","nombre","dni","edad","estadoCivil","equipo");
- 		 		example = Example.of(jugador,ignoringExampleMatcher);
- 		 		System.out.println(jugadorRepository.findAll());
- 		 		System.out.println(jugadorRepository.findAll(example));
- 		 		System.out.println("-------------------");
- 		 		
- 			}else {
- 				jugador.setPosicion(idPosicion);
- 	 			jugador.setEquipo(idEquipo);
- 		 		ignoringExampleMatcher = ExampleMatcher.matchingAny()
- 		 			      .withIgnorePaths("id_jugador","nombre","estadoCivil","dni","edad");
- 		 		example = Example.of(jugador,ignoringExampleMatcher);
- 		 		
- 			}
- 				
- 		}else { if(idEquipo!=0 && idPosicion==0) {
- 	 		jugador.setEquipo(idEquipo);
- 	 		jugador.setPosicion(24);
- 	 		ignoringExampleMatcher = ExampleMatcher.matchingAny()
- 	 			      .withIgnorePaths("id_jugador","nombre","estadoCivil","dni","edad");
- 	 		example = Example.of(jugador,ignoringExampleMatcher);
- 	 		}else {
- 	 			jugador.setEquipo(15);
- 	 			jugador.setPosicion(idPosicion);
- 	 	 		ignoringExampleMatcher = ExampleMatcher.matchingAny()
- 	 	 			 .withIgnorePaths("id_jugador","nombre","estadoCivil","dni","edad");
- 	 	 	example = Example.of(jugador,ignoringExampleMatcher);
- 	 		}
- 		}
- 		
- 		return jugadorRepository.findAll(example);	
- 	}
+	public List<Jugador> listarJugadoresxP(int idPosicion, int idEquipo) {
+		List<Jugador> list = new ArrayList<Jugador>();
+		if (idPosicion != -1 && idEquipo != -1) {
+			list = jugadorRepository.findByPosicionAndEquipo(idPosicion, idEquipo);
+		} else {
+			if (idPosicion == -1 && idEquipo != -1) {
+				list = jugadorRepository.findByEquipo(idEquipo);
+			} else if (idPosicion != -1 && idEquipo == -1) {
+				list = jugadorRepository.findByPosicion(idPosicion);
+			}
+		}
+		return list;
+//		Jugador jugador = new Jugador();
+//		Example<Jugador> example;
+//		ExampleMatcher ignoringExampleMatcher;
+//
+//		if (idEquipo == -1 || idPosicion == -1) {
+//			if (idEquipo == -1) {
+//				jugador.setPosicion(idPosicion);
+//				ignoringExampleMatcher = ExampleMatcher.matchingAny().withIgnorePaths("id_jugador", "nombre", "dni",
+//						"edad", "estadoCivil", "equipo");
+//				example = Example.of(jugador, ignoringExampleMatcher);
+//
+//			} else {
+//				jugador.setEquipo(idEquipo);
+//
+//				ignoringExampleMatcher = ExampleMatcher.matchingAny().withIgnorePaths("id_jugador", "nombre",
+//						"estadoCivil", "dni", "edad", "posicion");
+//				example = Example.of(jugador, ignoringExampleMatcher);
+//
+//			}
+//		} else {
+//
+//			if (idPosicion == 0 && idEquipo == 0 || idPosicion != 0 && idEquipo != 0) {
+//				if (idPosicion == 0 && idEquipo == 0) {
+//
+//					// jugador.setEquipo(15);
+//					jugador.setPosicion(24);
+//					ignoringExampleMatcher = ExampleMatcher.matchingAny().withIgnorePaths("id_jugador", "nombre", "dni",
+//							"edad", "estadoCivil", "equipo");
+//					example = Example.of(jugador, ignoringExampleMatcher);
+//					System.out.println(jugadorRepository.findAll());
+//					System.out.println(jugadorRepository.findAll(example));
+//					System.out.println("-------------------");
+//
+//				} else {
+//					jugador.setPosicion(idPosicion);
+//					jugador.setEquipo(idEquipo);
+//					ignoringExampleMatcher = ExampleMatcher.matchingAny().withIgnorePaths("idJugador", "nombre",
+//							"estadoCivil", "dni", "edad");
+//					System.out.println(ignoringExampleMatcher.getIgnoredPaths());
+//					example = Example.of(jugador, ignoringExampleMatcher);
+//
+//				}
+//
+//			} else {
+//				if (idEquipo != 0 && idPosicion == 0) {
+//					jugador.setEquipo(idEquipo);
+//					jugador.setPosicion(24);
+//					ignoringExampleMatcher = ExampleMatcher.matchingAny().withIgnorePaths("id_jugador", "nombre",
+//							"estadoCivil", "dni", "edad");
+//					example = Example.of(jugador, ignoringExampleMatcher);
+//				} else {
+//					jugador.setEquipo(15);
+//					jugador.setPosicion(idPosicion);
+//					ignoringExampleMatcher = ExampleMatcher.matchingAny().withIgnorePaths("id_jugador", "nombre",
+//							"estadoCivil", "dni", "edad");
+//					example = Example.of(jugador, ignoringExampleMatcher);
+//				}
+//			}
+//		}
+//		return jugadorRepository.findAll(example);
+	}
 
 	@Override
 	public void EliminaEquipoDeJugadores(int idEquipo) {
-		List<Jugador> listJugadores= listAllJugador();
-		List<Jugador> listJugadoresAMdificar=new ArrayList<Jugador>();
-		for (int i =0; i<listJugadores.size(); i++) {
-				if(listJugadores.get(i).getEquipo()==idEquipo) {
-					listJugadoresAMdificar.add(listJugadores.get(i));
-				}
+		List<Jugador> listJugadores = listAllJugador();
+		List<Jugador> listJugadoresAMdificar = new ArrayList<Jugador>();
+		for (int i = 0; i < listJugadores.size(); i++) {
+			if (listJugadores.get(i).getEquipo() == idEquipo) {
+				listJugadoresAMdificar.add(listJugadores.get(i));
 			}
+		}
 		Jugador aux;
 		for (int j = 0; j < listJugadoresAMdificar.size(); j++) {
-			aux=listJugadoresAMdificar.get(j);
+			aux = listJugadoresAMdificar.get(j);
 			aux.setEquipo(15);
 			addJugador(aux);
 		}
-		
-	}@Override
+
+	}
+
+	@Override
 	public void EliminaPosicionDeJugadores(int idPosicion) {
-		List<Jugador> listJugadores= listAllJugador();
-		List<Jugador> listJugadoresAMdificar=new ArrayList<Jugador>();
-		for (int i =0; i<listJugadores.size(); i++) {
-				if(listJugadores.get(i).getPosicion()==idPosicion) {
-					listJugadoresAMdificar.add(listJugadores.get(i));
-				}
+		List<Jugador> listJugadores = listAllJugador();
+		List<Jugador> listJugadoresAMdificar = new ArrayList<Jugador>();
+		for (int i = 0; i < listJugadores.size(); i++) {
+			if (listJugadores.get(i).getPosicion() == idPosicion) {
+				listJugadoresAMdificar.add(listJugadores.get(i));
 			}
+		}
 		Jugador aux;
 		for (int j = 0; j < listJugadoresAMdificar.size(); j++) {
-			aux=listJugadoresAMdificar.get(j);
-			//seteo la posicion del jugador a el id de de la posicion null
+			aux = listJugadoresAMdificar.get(j);
+			// seteo la posicion del jugador a el id de de la posicion null
 			aux.setPosicion(24);
 			addJugador(aux);
 		}
-		
+
 	}
 }

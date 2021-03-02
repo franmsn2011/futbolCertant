@@ -61,36 +61,84 @@ public class JugadorController {
 		return mav;
 	}
 
+	/*
+	 * @GetMapping("/verJugadores/{idPosicion}/{idEquipo}") public ModelAndView
+	 * verJugadores(@PathVariable int idPosicion, @PathVariable int idEquipo, Model
+	 * model) { List<Jugador> listJuga =
+	 * jugadorService.listarJugadoresxP(idPosicion, idEquipo);
+	 * System.out.println(listJuga); String respuesta = "Nada"; if (idEquipo == 0 &&
+	 * idPosicion == 0 || idEquipo != 0 && idPosicion != 0) { if (idEquipo == 0 &&
+	 * idPosicion == 0) { respuesta =
+	 * "Estos son los jugadores que no tiene ningun equipo y posicion"; } else {
+	 * respuesta = "Estos son los jugadores que tiene la posicion " +
+	 * posicionService.listarId(idPosicion).get().getNombre() +
+	 * "y jugan en el equipo " + EquipoService.listarId(idEquipo).get().getNombre();
+	 * 
+	 * } // idEquipo != 0 && idPosicion == 0 || idEquipo == 0 && idPosicion != 0 }
+	 * else { if (idEquipo != 0 && idPosicion == 0) { respuesta =
+	 * "Estos son los jugadores que jugan en el equipo " +
+	 * EquipoService.listarId(idEquipo).get().getNombre(); } else {// idEquipo == 0
+	 * && idPosicion != 0 respuesta =
+	 * "Estos son los jugadores que tiene la posicion " +
+	 * posicionService.listarId(idPosicion).get().getNombre(); }
+	 * 
+	 * }
+	 * 
+	 * ModelAndView mav = new ModelAndView("jugadoresXposicion");
+	 * mav.addObject("respuesta", respuesta); mav.addObject("jugadores",
+	 * listAllJugador(listJuga)); return mav; }
+	 */
 	@GetMapping("/verJugadores/{idPosicion}/{idEquipo}")
-	public ModelAndView verJugadores(@PathVariable int idPosicion, @PathVariable int idEquipo, Model model) {
+	public ModelAndView verJugadores2(@PathVariable int idPosicion, @PathVariable int idEquipo, Model model) {
 		List<Jugador> listJuga = jugadorService.listarJugadoresxP(idPosicion, idEquipo);
 		System.out.println(listJuga);
 		String respuesta = "Nada";
-		if (idEquipo == 0 && idPosicion == 0 || idEquipo != 0 && idPosicion != 0) {
-			if (idEquipo == 0 && idPosicion == 0) {
-				respuesta="Estos son los jugadores que no tiene ningun equipo y posicion";
-			}else {
+		if (idEquipo == -1 || idPosicion == -1) {
+			if (idEquipo == -1) {
 				respuesta = "Estos son los jugadores que tiene la posicion "
-						+ posicionService.listarId(idPosicion).get().getNombre() + "y jugan en el equipo "
+						+ posicionService.listarId(idPosicion).get().getNombre();
+			} else {
+				respuesta = "Estos son los jugadores que tiene el equipo "
+						+ EquipoService.listarId(idEquipo).get().getNombre();
+			}
+		} else {
+
+			if (idEquipo == 15 && idPosicion == 24) {
+				respuesta = "Estos son los jugadores que no tiene ningun equipo y posicion";
+			} else {
+				respuesta = "Estos son los jugadores que tiene la posicion "
+						+ posicionService.listarId(idPosicion).get().getNombre() + " y jugan en el equipo "
 						+ EquipoService.listarId(idEquipo).get().getNombre();
 
 			}
-			//idEquipo != 0 && idPosicion == 0 || idEquipo == 0 && idPosicion != 0
-		} else{
-			if (idEquipo != 0 && idPosicion == 0) {
-				respuesta = "Estos son los jugadores que jugan en el equipo "
-						+ EquipoService.listarId(idEquipo).get().getNombre();
-			}else {//idEquipo == 0 && idPosicion != 0
-				respuesta = "Estos son los jugadores que tiene la posicion "
-						+ posicionService.listarId(idPosicion).get().getNombre();
-			}
-			
+
 		}
 
 		ModelAndView mav = new ModelAndView("jugadoresXposicion");
 		mav.addObject("respuesta", respuesta);
-		mav.addObject("jugadores", listJuga);
+		mav.addObject("jugadores", listAllJugador(listJuga));
 		return mav;
+	}
+
+	public List<JugadorAdapter> listAllJugador(List<Jugador> list) {
+		List<JugadorAdapter> listJugadorAdapter = new ArrayList<JugadorAdapter>();
+		List<Jugador> listJugador = list;
+		Jugador aux = new Jugador();
+		for (int i = 0; i < listJugador.size(); i++) {
+			aux = listJugador.get(i);
+			String e = "Ninguno";
+			if (aux.getEquipo() != 0) {
+				e = EquipoService.listarId(aux.getEquipo()).get().getNombre();
+			}
+			String p = "Ninguna";
+			if (aux.getPosicion() != 0) {
+				p = posicionService.listarId(aux.getPosicion()).get().getNombre();
+			}
+			listJugadorAdapter.add(new JugadorAdapter(aux.getIdjugador(), aux.getNombre(), aux.getDni(), aux.getEdad(),
+					p, aux.getEstadoCivil(), e));
+		}
+
+		return listJugadorAdapter;
 	}
 
 	@GetMapping("/new")

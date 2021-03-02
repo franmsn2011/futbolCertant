@@ -13,7 +13,12 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
 	crossorigin="anonymous"></script>
+	<script src="https://code.jquery.com/jquery-3.3.1.min.js"
+	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+	crossorigin="anonymous">
+  </script>
 <title>Insert title here</title>
+<script src="/jQuery/equipos.js"></script>
 </head>
 <body>
 	<div class="container mt-4">
@@ -22,7 +27,7 @@
 				<div class="card">
 					<div class="card-header">
 						<h3>Equipo</h3>
-						<h4 class="text-danger" th:text="${excepcion}"  ></h4>
+						<h4 class="text-danger" th:text="${excepcion}" id="idExc" ></h4>
 					</div>
 					<div class="card-body">
 						<div class="form-group mb-3 row">
@@ -52,7 +57,7 @@
 
 					</div>
 						<div class="card-footer">
-												<input type="submit" value="Guardar" class="btn btn-success">
+												<input id="btp" type="submit" value="Guardar" class="btn btn-success">
 						</div>
 
 

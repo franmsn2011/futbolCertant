@@ -8,7 +8,7 @@ $(document).ready(function () {
 	
 	
     //console.log("adsas")
-   	$('h1').html('texto modificado con etiqueta h1');
+   	$('h1').html('Futbol');
     // $('#idh1').html('texto modificado con ID');
     //$('.text-center').html('texto modificado con clase');
     
