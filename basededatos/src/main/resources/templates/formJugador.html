@@ -21,7 +21,7 @@
 <script src="/jQuery/jugadores.js"></script>
 <title>Formulario de Jugadoress</title>
 </head>
-<body>
+<body background="https://fondosmil.com/fondo/30398.jpg">
 	<div class="container mt-4">
 		<div class="col-sm-6">
 			<form th:action="@{/jugador/seve}" th:object=${jugador} method="post">
@@ -39,16 +39,15 @@
 							</div>
 						</div>
 						<div class="mb-3 row form-group">
-							<label for="exampleDataList" class="col-sm-2 col-form-label">Posicion</label>
-							<div clasas="col-sm-9">
-								<select id="idPos" th:field="*{posicion}"
-									class="form-select form-select-lg mb-3">
+							<label for="exampleDataList" class="col-sm-3 col-form-label">Posicion</label>
+							<div class="col-sm-9">
+								<select id="idPos" th:field="*{posicion}" class="form-select form-select-lg mb-3">
 									<option selected value="24">Ninguna</option>
 								</select>
 							</div>
 						</div>
 						<div class="mb-3 row form-group">
-							<label for="exampleDataList" class="col-sm-2 col-form-label">Equipo</label>
+							<label for="exampleDataList" class="col-sm-3 col-form-label">Equipo</label>
 							<div class="col-sm-9">
 								<select id="idEqui" th:field="*{equipo}"
 									class="form-select form-select-lg mb-3 ">
@@ -60,18 +59,20 @@
 
 						<div class="mb-3 row form-group" >
 							<label class="col-sm-3 col-form-label" for="idNombre">Nombre</label>
-							<div class="col-sm-9" id="idDivNombre">
+							<div class="col-sm-9" >
 								<input th:field="*{nombre}" type="text" class="form-control"
 									id="idNombre">
+									<div id="idDivNombre"> </div>
 							</div>
 						</div>
 
 						<div class=" mb-3 row form-group">
 
 							<label class="col-sm-3 col-form-label" for="idDni">DNI</label>
-							<div class="col-sm-9" id="idDivDni" >
+							<div class="col-sm-9"  >
 								<input class="form-control" id="idDni" th:field="*{dni}"
 									type="text">
+									<div id="idDivDni"> </div>
 							</div>
 						</div>
 
@@ -79,9 +80,10 @@
 						<div class=" mb-3 row form-group">
 
 							<label class="col-sm-3 col-form-label" for="idEdad">Edad</label>
-							<div class="col-sm-9" id="idDivEdad">
+							<div class="col-sm-9" >
 								<input th:field="*{edad}" type="text" class="form-control"
 									id="idedad">
+									<div id="idDivEdad"></div>
 							</div>
 						</div>
 						<div class=" mb-3 row form-group">
@@ -89,19 +91,17 @@
 							<label class="col-sm-3 col-form-label" for="idEstado">Estado
 								civil</label>
 							<div class="col-sm-9">
-								<!-- <<input th:field="*{estadoCivil}" type="text"
-									class="form-control" id="idEstado">
-								 --> <select id="idEstado" th:field="*{estadoCivil}"
+								 <select id="idEstado" th:field="*{estadoCivil}"
 									class="form-select form-select-lg mb-3 ">
 									<option selected value="Soltero">Soltero</option>
 									<option value="Casado">Casado</option>
 									<option value="Divorciado">divorciado</option>
 									<option value="Viudo">viudo</option>
-								</select>	
-									
-									
+								</select>										
 							</div>
 						</div>
+						
+						
 
 					</div>
 					<div class="card-footer"></div>

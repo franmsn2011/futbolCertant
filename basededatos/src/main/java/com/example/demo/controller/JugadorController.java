@@ -17,7 +17,6 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.adapter.JugadorAdapter;
 import com.example.demo.entity.Jugador;
-import com.example.demo.entity.Posicion;
 import com.example.demo.service.EquipoService;
 import com.example.demo.service.JugadorService;
 import com.example.demo.service.PosicionService;
@@ -61,37 +60,9 @@ public class JugadorController {
 		return mav;
 	}
 
-	/*
-	 * @GetMapping("/verJugadores/{idPosicion}/{idEquipo}") public ModelAndView
-	 * verJugadores(@PathVariable int idPosicion, @PathVariable int idEquipo, Model
-	 * model) { List<Jugador> listJuga =
-	 * jugadorService.listarJugadoresxP(idPosicion, idEquipo);
-	 * System.out.println(listJuga); String respuesta = "Nada"; if (idEquipo == 0 &&
-	 * idPosicion == 0 || idEquipo != 0 && idPosicion != 0) { if (idEquipo == 0 &&
-	 * idPosicion == 0) { respuesta =
-	 * "Estos son los jugadores que no tiene ningun equipo y posicion"; } else {
-	 * respuesta = "Estos son los jugadores que tiene la posicion " +
-	 * posicionService.listarId(idPosicion).get().getNombre() +
-	 * "y jugan en el equipo " + EquipoService.listarId(idEquipo).get().getNombre();
-	 * 
-	 * } // idEquipo != 0 && idPosicion == 0 || idEquipo == 0 && idPosicion != 0 }
-	 * else { if (idEquipo != 0 && idPosicion == 0) { respuesta =
-	 * "Estos son los jugadores que jugan en el equipo " +
-	 * EquipoService.listarId(idEquipo).get().getNombre(); } else {// idEquipo == 0
-	 * && idPosicion != 0 respuesta =
-	 * "Estos son los jugadores que tiene la posicion " +
-	 * posicionService.listarId(idPosicion).get().getNombre(); }
-	 * 
-	 * }
-	 * 
-	 * ModelAndView mav = new ModelAndView("jugadoresXposicion");
-	 * mav.addObject("respuesta", respuesta); mav.addObject("jugadores",
-	 * listAllJugador(listJuga)); return mav; }
-	 */
 	@GetMapping("/verJugadores/{idPosicion}/{idEquipo}")
 	public ModelAndView verJugadores2(@PathVariable int idPosicion, @PathVariable int idEquipo, Model model) {
 		List<Jugador> listJuga = jugadorService.listarJugadoresxP(idPosicion, idEquipo);
-		System.out.println(listJuga);
 		String respuesta = "Nada";
 		if (idEquipo == -1 || idPosicion == -1) {
 			if (idEquipo == -1) {
@@ -109,11 +80,9 @@ public class JugadorController {
 				respuesta = "Estos son los jugadores que tiene la posicion "
 						+ posicionService.listarId(idPosicion).get().getNombre() + " y jugan en el equipo "
 						+ EquipoService.listarId(idEquipo).get().getNombre();
-
 			}
 
 		}
-
 		ModelAndView mav = new ModelAndView("jugadoresXposicion");
 		mav.addObject("respuesta", respuesta);
 		mav.addObject("jugadores", listAllJugador(listJuga));
@@ -137,7 +106,6 @@ public class JugadorController {
 			listJugadorAdapter.add(new JugadorAdapter(aux.getIdjugador(), aux.getNombre(), aux.getDni(), aux.getEdad(),
 					p, aux.getEstadoCivil(), e));
 		}
-
 		return listJugadorAdapter;
 	}
 
@@ -155,7 +123,6 @@ public class JugadorController {
 			model.addAttribute("exception", e.getMessage());
 			return "formJugador";
 		}
-
 		return "redirect:/jugador/list/";
 	}
 
@@ -180,7 +147,6 @@ public class JugadorController {
 
 	@PostMapping("/formEP")
 	public String formEP(@Validated Jugador j) {
-		// return "redirect:/jugador/list/";
 		return "redirect:/jugador/verJugadores/" + j.getPosicion() + "/" + j.getEquipo();
 	}
 

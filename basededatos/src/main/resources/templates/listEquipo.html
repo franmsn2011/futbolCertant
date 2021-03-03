@@ -10,8 +10,8 @@
   </script>
 
 </head>
-<body>	
-	<table class="table table-striped">
+<body background="https://fondosmil.com/fondo/30398.jpg"class="text-white">	
+	<table class="table table-striped bg-info text-white">
 		<thead>
 			<tr>
 				<th>Nombre</th>
@@ -20,7 +20,7 @@
 				<th>ACCION</th>
 			</tr>
 		</thead>
-		<tbody th:each="equipo : ${equipos}" class="table-striped">
+		<tbody th:each="equipo : ${equipos}" class="table-striped text-white">
 			<tr>
 				<th th:text="${equipo.nombre}"> </th>
 				<th th:text="${equipo.idEquipo}"> </th>

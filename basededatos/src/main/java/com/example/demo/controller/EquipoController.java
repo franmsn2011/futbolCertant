@@ -23,49 +23,48 @@ public class EquipoController {
 	@Autowired
 	@Qualifier("EquipoService")
 	private EquipoService equipoService;
-	
+
 	@Autowired
 	@Qualifier("JugadorService")
 	private JugadorService jugadorService;
-	
-	@GetMapping({"/","","/list"})
+
+	@GetMapping({ "/", "", "/list" })
 	public ModelAndView listAllEquipo() {
 		ModelAndView mav = new ModelAndView("listEquipo");
-		mav.addObject("equipos",equipoService.listAllEquipo());
+		mav.addObject("equipos", equipoService.listAllEquipo());
 		return mav;
 	}
-	@GetMapping("/edit/")
-	public String e(Model model) {
-		equipoService.setUserInfoById("juan", "segunda", 15);
-		return "redirect:/equipo/list";
-	}
+
 	@GetMapping("/new")
 	public String agregar(Model model) {
 		model.addAttribute("equipo", new Equipo());
 		return "formEquipo";
 	}
+
 	@PostMapping("/seve")
-	public String seve(@Validated Equipo e,Model model) {
+	public String seve(@Validated Equipo e, Model model) {
 		try {
 			equipoService.addEquipo(e);
-			
+
 		} catch (Exception e2) {
 			model.addAttribute("excepcion", e2.getMessage());
 			return "formEquipo";
 		}
 		return "redirect:/equipo/list/";
 	}
+
 	@GetMapping("/editar/{idEquipo}")
-	public String editar(@PathVariable int idEquipo,Model model) {
-		Optional<Equipo> equipo=equipoService.listarId(idEquipo);
+	public String editar(@PathVariable int idEquipo, Model model) {
+		Optional<Equipo> equipo = equipoService.listarId(idEquipo);
 		model.addAttribute("equipo", equipo);
 		return "formEquipo";
 	}
+
 	@GetMapping("/eliminar/{idEquipo}")
-	public String delete(Model model,@PathVariable int idEquipo) {
+	public String delete(Model model, @PathVariable int idEquipo) {
 		jugadorService.EliminaEquipoDeJugadores(idEquipo);
 		equipoService.delete(idEquipo);
 		return "redirect:/equipo/list";
 	}
-	
+
 }

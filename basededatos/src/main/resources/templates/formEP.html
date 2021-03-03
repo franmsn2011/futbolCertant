@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Jugadores por posicion y equipo</title>
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -14,31 +14,32 @@
 	src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
 	integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
 	crossorigin="anonymous"></script>
-
+<link rel="stylesheet" type="text/css" href="../css/list.css">
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous">
-  </script>
+	
+</script>
 <script src="/jQuery/jugadores.js"></script>
 </head>
-<body>
+<body id="idFondo" background="https://icdn4.digitaltrends.com/image/digitaltrends_es/miami-background-2-1200x630-c-ar1.91.jpg">
 	<div class="container mt-4">
 		<div class="col-sm-6">
-			<form th:action="@{/jugador/formEP}" th:object=${jugador} method="post">
+			<form th:action="@{/jugador/formEP}" th:object=${jugador}
+				method="post">
 				<div class="card">
 					<div class="card-header">
 						<h3>Jugador</h3>
-		>
 					</div>
 					<div class="card-body">
 
 						<div class="mb-3 row form-group">
 							<label for="exampleDataList" class="col-sm-2 col-form-label">Posicion</label>
-							<div clasas="col-sm-9">
+							<div class="col-sm-9">
 								<select id="idPos" th:field="*{posicion}"
 									class="form-select form-select-lg  form-control mb-3">
-									<option selected value="-1">--</option>
-									<option value="24">Ninguna</option>
+									<option selected value="24">Ninguna</option>
+									<option  value="-1">Todas</option>
 								</select>
 							</div>
 						</div>
@@ -47,17 +48,15 @@
 							<div class="col-sm-9">
 								<select id="idEqui" th:field="*{equipo}"
 									class="form-select form-select-lg mb-3 ">
-									<option selected value="-1">--</option>
-									<option value="15">Ninguno</option>
+									<option  selected value="15">Ninguno</option>
+									<option  value="-1">Todos</option>
 								</select>
 							</div>
 						</div>
-					
+
 					</div>
 					<div class="card-footer"></div>
-						 <input type="submit" value="Guardar" class="btn btn-success">
-						<!--<a th:href="@{/jugador/verJugadores/}+${jugador.posicion}+'/'+${jugador.equipo}" class="btn btn-primary">ver jugadores en esta posicion y equipo</a>
- -->
+					<input type="submit" value="Guardar" class="btn btn-success">
 				</div>
 			</form>
 		</div>

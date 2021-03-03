@@ -1,19 +1,14 @@
 package com.example.demo.service.Impl;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Equipo;
 import com.example.demo.excepcion.EquipoErrorDatosIguales;
-import com.example.demo.excepcion.EquipoExistenteException;
 import com.example.demo.repository.EquipoRepository;
 import com.example.demo.service.EquipoService;
 
@@ -27,7 +22,7 @@ public class EquipoServiceImpl implements EquipoService {
 	@Override
 	public List<Equipo> listAllEquipo() {
 		List<Equipo> list = equipoRepository.findAll();
-		list.remove(new Equipo(15,"ninguno","ninguna"));
+		list.remove(new Equipo(15, "ninguno", "ninguna"));
 		return list;
 	}
 
@@ -58,13 +53,6 @@ public class EquipoServiceImpl implements EquipoService {
 	@Override
 	public void delete(int idEquipo) {
 		equipoRepository.deleteById(idEquipo);
-
-	}
-
-	@Override
-	@Modifying
-	@Query("update EQUIPO e set e.division='juann' ,e.nombre = 'funciona' where  e.id_equipo ='15'")
-	public void setUserInfoById(String nombre, String divicion, int id_equipo) {
 
 	}
 

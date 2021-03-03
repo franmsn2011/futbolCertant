@@ -7,14 +7,11 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-
 @Table
 @Entity
 public class Equipo implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-	// @GeneratedValue(strategy=GenerationType.AUTO)
 	@Column(name = "idEquipo")
 	private int idEquipo;
 	@Column(name = "nombre")
@@ -22,9 +19,6 @@ public class Equipo implements Serializable {
 	@Column(name = "division")
 	private String division;
 
-	// @OneToMany (mappedBy = "equipo",cascade = CascadeType.ALL)
-	// @JoinColumn
-	// private List<Jugador> listJugadores = new ArrayList<Jugador>();
 	public Equipo() {
 		super();
 	}
@@ -63,7 +57,7 @@ public class Equipo implements Serializable {
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

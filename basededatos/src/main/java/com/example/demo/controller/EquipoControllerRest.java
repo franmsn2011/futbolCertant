@@ -18,22 +18,20 @@ import com.example.demo.service.EquipoService;
 @RestController()
 public class EquipoControllerRest {
 
-
 	@Autowired
 	@Qualifier("EquipoService")
 	private EquipoService equipoService;
-	
+
 	@RequestMapping(value = "/equip", method = RequestMethod.GET)
 	public String listAllEquipos() {
-		 JSONObject myObject = new JSONObject();
-		 myObject.put("equipos",equipoService.listAllEquipo() );
-	     System.out.println(myObject.toString());
-	     return myObject.toString();
+		JSONObject myObject = new JSONObject();
+		myObject.put("equipos", equipoService.listAllEquipo());
+		return myObject.toString();
 	}
+
 	@GetMapping("/traer/{idEquipo}")
 	public String editar(@PathVariable int idEquipo, Model model) {
-		Optional<Equipo>equipos=equipoService.listarId(idEquipo);
-		System.out.println(equipos.toString());
+		Optional<Equipo> equipos = equipoService.listarId(idEquipo);
 		return equipos.toString();
 	}
 }

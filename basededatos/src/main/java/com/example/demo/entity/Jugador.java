@@ -7,19 +7,16 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
-
 @Table
 @Entity
-public class Jugador implements Serializable{
+public class Jugador implements Serializable {
 	private static final long serialVersionUID = 1L;
 	@Id
-    //@GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="idJugador")
-    private int idjugador;
-    @Column
-    private String nombre;
-    @Column
+	@Column(name = "idJugador")
+	private int idjugador;
+	@Column
+	private String nombre;
+	@Column
 	private int dni;
 	@Column
 	private int edad;
@@ -27,10 +24,11 @@ public class Jugador implements Serializable{
 	private int posicion;
 	@Column
 	private String estadoCivil;
-	//@ManyToOne (fetch = FetchType.LAZY)
-	//@JoinColumn(name= "equipo")
+	// @ManyToOne (fetch = FetchType.LAZY)
+	// @JoinColumn(name= "equipo")
 	@Column
 	private int equipo;
+
 	public Jugador(int idjugador, String nombre, int dni, int edad, int posicion, String estadoCivil) {
 		super();
 		this.idjugador = idjugador;
@@ -41,8 +39,8 @@ public class Jugador implements Serializable{
 		this.estadoCivil = estadoCivil;
 
 	}
-	public Jugador(int idjugador, String nombre, int dni, int edad, int posicion, String estadoCivil,
-			int equipo) {
+
+	public Jugador(int idjugador, String nombre, int dni, int edad, int posicion, String estadoCivil, int equipo) {
 		super();
 		this.idjugador = idjugador;
 		this.nombre = nombre;
@@ -52,55 +50,71 @@ public class Jugador implements Serializable{
 		this.estadoCivil = estadoCivil;
 		this.equipo = equipo;
 	}
+
 	public Jugador() {
 		super();
 	}
+
 	public int getIdjugador() {
 		return idjugador;
 	}
+
 	public void setIdjugador(int idjugador) {
 		this.idjugador = idjugador;
 	}
+
 	public String getNombre() {
 		return nombre;
 	}
+
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
+
 	public int getDni() {
 		return dni;
 	}
+
 	public void setDni(int dni) {
 		this.dni = dni;
 	}
+
 	public int getEdad() {
 		return edad;
 	}
+
 	public void setEdad(int edad) {
 		this.edad = edad;
 	}
+
 	public int getPosicion() {
 		return posicion;
 	}
+
 	public void setPosicion(int posicion) {
 		this.posicion = posicion;
 	}
+
 	public String getEstadoCivil() {
 		return estadoCivil;
 	}
+
 	public void setEstadoCivil(String estadoCivil) {
 		this.estadoCivil = estadoCivil;
 	}
+
 	public int getEquipo() {
 		return equipo;
 	}
+
 	public void setEquipo(int equipo) {
 		this.equipo = equipo;
 	}
+
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -112,6 +126,7 @@ public class Jugador implements Serializable{
 		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
 		return result;
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -137,14 +152,14 @@ public class Jugador implements Serializable{
 				return false;
 		} else if (!nombre.equals(other.nombre))
 			return false;
-		
+
 		return true;
 	}
+
 	@Override
 	public String toString() {
 		return "Jugador [idjugador=" + idjugador + ", nombre=" + nombre + ", dni=" + dni + ", edad=" + edad
 				+ ", posicion=" + posicion + ", estadoCivil=" + estadoCivil + ", Equipo=" + equipo + "]\n";
 	}
 
-	
 }

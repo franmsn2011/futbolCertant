@@ -1,27 +1,29 @@
 $(document).ready(function() {
-	console.log(3);
 	$("#btp").click(function() {
-		console.log(33);
 		var nom = document.getElementById("idNombre").value;
 		var div = document.getElementById("idDivision").value;
 		var datoss = document.getElementById("idExc");
-		if (nom != "" && div != "") {
+		var letras = new RegExp('^[a-zA-Z]*$');
+		var divNom = document.getElementById("idDivNom");
+		var divDiv = document.getElementById("idDivDiv");
+		if (nom != "" && div != "" && letras.test(nom) && letras.test(div)) {
 			return OK;
-
 		} else {
-			if(nom == "" && div == ""){
-				datoss.innerHTML= `Error los datos no pueden estar vacios`;
-			}else {
-				if (nom == "") {
-					datoss.innerHTML = `Error cargue algun nombre`;
-
-				} else {
-					datoss.innerHTML = `Error cargue alguna division`;
-
-				}
+			divNom.innerHTML = ` `;
+			if (nom == "") {
+				divNom.innerHTML = '<h5 class="text-danger">Tiene que ingresar un nombre</h5>';
+			} else {
+				if (!letras.test(nom))
+					divNom.innerHTML = '<h5 class="text-danger">El nombre solo puede contener caracteres alfanumericos</h5>';
+			}
+			divDiv.innerHTML = ` `;
+			if (div == "") {
+				divDiv.innerHTML = '<h5 class="text-danger">Tiene que ingresar una Division</h5>';
+			} else {
+				if (!letras.test(div))
+					divDiv.innerHTML = '<h5 class="text-danger">La division solo puede contener caracteres alfanumericos</h5>';
 			}
 		}
-		alert("Cargue datos otra ves");
 		return false;
 	});
 

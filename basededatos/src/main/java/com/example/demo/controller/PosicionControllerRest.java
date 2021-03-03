@@ -17,25 +17,21 @@ import com.example.demo.service.PosicionService;
 
 @RestController()
 public class PosicionControllerRest {
-	
+
 	@Autowired
 	@Qualifier("PosicionService")
 	private PosicionService posicionService;
+
 	@RequestMapping(value = "/posis", method = RequestMethod.GET)
 	public String listAllPosiciones() {
-		 JSONObject myObject = new JSONObject();
-		 System.out.println("aaaaaaaaaaaaaaaaaaaaaa");
-	        myObject.put("posiciones",posicionService.listAllPosicion() );
-	        System.out.println(myObject.toString());
-	        
-	        
-	   
+		JSONObject myObject = new JSONObject();
+		myObject.put("posiciones", posicionService.listAllPosicion());
 		return myObject.toString();
 	}
-	
+
 	@GetMapping("/traer/{idPosicion}")
 	public Optional<Posicion> editar(@PathVariable int idPosicion, Model model) {
-		Optional<Posicion>po=posicionService.listarId(idPosicion);
+		Optional<Posicion> po = posicionService.listarId(idPosicion);
 		return po;
 	}
 }
