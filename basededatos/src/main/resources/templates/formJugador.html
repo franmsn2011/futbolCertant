@@ -20,6 +20,8 @@
   </script>
 <script src="/jQuery/jugadores.js"></script>
 <title>Formulario de Jugadoress</title>
+ <link id="contextPathHolder" th:href="@{__${#httpServletRequest.requestURI}__}"/>
+ <script id="ruta" th:inline="javascript"> var contextRoot = /*[[@{/}]]*/ ''; </script>
 </head>
 <body background="https://fondosmil.com/fondo/30398.jpg">
 	<div class="container mt-4">
@@ -60,7 +62,7 @@
 						<div class="mb-3 row form-group" >
 							<label class="col-sm-3 col-form-label" for="idNombre">Nombre</label>
 							<div class="col-sm-9" >
-								<input th:field="*{nombre}" type="text" class="form-control"
+								<input placeholder="Ingrese su nombre" th:field="*{nombre}" type="text" class="form-control"
 									id="idNombre">
 									<div id="idDivNombre"> </div>
 							</div>
@@ -70,8 +72,8 @@
 
 							<label class="col-sm-3 col-form-label" for="idDni">DNI</label>
 							<div class="col-sm-9"  >
-								<input class="form-control" id="idDni" th:field="*{dni}"
-									type="text">
+								<input placeholder="Ingrese su DNI" class="form-control"  value id="idDni" th:field="*{dni}"
+									type="number">
 									<div id="idDivDni"> </div>
 							</div>
 						</div>
@@ -81,7 +83,7 @@
 
 							<label class="col-sm-3 col-form-label" for="idEdad">Edad</label>
 							<div class="col-sm-9" >
-								<input th:field="*{edad}" type="text" class="form-control"
+								<input placeholder="Ingrese su edad" th:field="*{edad}" value type="number" class="form-control"
 									id="idedad">
 									<div id="idDivEdad"></div>
 							</div>
@@ -112,6 +114,6 @@
 			</form>
 		</div>
 	</div>
-
+<a href="#" id="backLink" class="btn btn-success" >Atras</a>
 </body>
 </html>

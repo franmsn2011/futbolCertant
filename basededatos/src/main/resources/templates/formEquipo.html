@@ -22,6 +22,7 @@
 </head>
 <body background="https://wallpaperaccess.com/full/2244833.jpg" height="10%" width="10%">
 	<div class="container mt-4">
+	<h2 id="regTitle"></h2>
 		<div class="col-sm-6">
 			<form th:action="@{/equipo/seve}" th:object=${equipo} method="post">
 				<div class="card">
@@ -33,7 +34,7 @@
 						<div class="form-group mb-3 row">
 							<label class="col-sm-3 col-form-label" for="idId">ID</label>
 							<div class="col-sm-9">
-							 <input th:field="*{idEquipo}" readonly="readonly" type="text" class="form-control"
+							 <input  th:field="*{idEquipo}" readonly="readonly" type="text" class="form-control"
 									id="idId">
 							 </div>
 
@@ -41,7 +42,7 @@
 						<div class="form-group mb-3 row">
 							<label class="col-sm-3 col-form-label" for="idNombre">nombre</label> 
 							<div class="col-sm-9">
-							<input th:field="*{nombre}" type="text" class="form-control"
+							<input placeholder="Escribe el nombre de tu equipo" th:field="*{nombre}" type="text" class="form-control"
 									id="idNombre">
 									<div id="idDivNom">
 									</div>
@@ -52,7 +53,7 @@
 
 							<label class="col-sm-3 col-form-label" for="idDivision">division</label> 
 							<div class="col-sm-9">
-							<input th:field="*{division}" type="text" class="form-control"
+							<input placeholder="Escribe la division de tu equipo" th:field="*{division}" type="text" class="form-control"
 									id="idDivision">
 									<div id="idDivDiv">
 									</div>
@@ -69,5 +70,6 @@
 			</form>
 		</div>
 	</div>
+	<a href="#" id="backLink" class="btn btn-success" >Atras</a>
 </body>
 </html>

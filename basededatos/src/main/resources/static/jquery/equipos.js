@@ -1,11 +1,16 @@
 $(document).ready(function() {
+	$("#backLink").click(function(event) {
+		event.preventDefault();
+		history.back(1);
+	});
+	$("#regTitle").html("Hello World");
 	$("#btp").click(function() {
-		var nom = document.getElementById("idNombre").value;
-		var div = document.getElementById("idDivision").value;
-		var datoss = document.getElementById("idExc");
-		var letras = new RegExp('^[a-zA-Z]*$');
-		var divNom = document.getElementById("idDivNom");
-		var divDiv = document.getElementById("idDivDiv");
+		var nom = $("#idNombre").val();
+		var div = $("#idDivision").val();
+		var datoss = $("#idExc")[0];
+		var letras = new RegExp('^[A-Za-z\s]*$');
+		var divNom = $("#idDivNom")[0];
+		var divDiv = $("#idDivDiv")[0];
 		if (nom != "" && div != "" && letras.test(nom) && letras.test(div)) {
 			return OK;
 		} else {

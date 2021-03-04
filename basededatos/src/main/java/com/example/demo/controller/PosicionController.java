@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +15,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.example.demo.adapter.PosicionAdapter;
 import com.example.demo.entity.Posicion;
 import com.example.demo.service.JugadorService;
 import com.example.demo.service.PosicionService;
@@ -32,7 +35,24 @@ public class PosicionController {
 	public ModelAndView listAllPosicion() {
 		// HttpServletRequest request
 		ModelAndView mav = new ModelAndView("list");
-		mav.addObject("posiciones", posicionService.listAllPosicion());
+		List<PosicionAdapter> list= new ArrayList<PosicionAdapter>();
+		List<Posicion> listPos=posicionService.listAllPosicion();
+		Posicion aux= new Posicion();
+		
+		for (int i = 0; i < listPos.size(); i++) {
+			aux = listPos.get(i);
+			String e = "Ninguno";
+			if(aux.isAtrasadoAdelantado()==true) {
+				e="Si";
+			}else {
+				e="No";
+			}
+			
+			list.add(new PosicionAdapter(aux.getIdPosicion(),aux.getNombre(),e));
+		}
+		
+		
+		mav.addObject("posiciones", list);
 		mav.addObject("poss", new Posicion());
 		return mav;
 	}

@@ -13,11 +13,12 @@
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous">
   </script>
-
+  <link rel="stylesheet" type="text/css" href="../css/list.css">
+<script src="/jQuery/funciones.js"></script>
 </head>
-<body>
-	<h1 th:text="${respuesta}" class="card-title"></h1>
-	<table class="table table-striped">
+<body id="idFondo" background="https://img.fifa.com/image/upload/t_l1/dq6tczszvf4ebburt5b8.jpg">
+	<h1 th:text="${respuesta}" class="card-title bg-white"></h1>
+	<table class="table table-striped bg-info text-white">
 		<thead>
 			<tr>
 				<th>id</th>
@@ -39,9 +40,9 @@
 				<th th:text="${jugadorAdapter.posicion}"></th>
 				<th th:text="${jugadorAdapter.estadoCivil}"></th>
 				<th th:text="${jugadorAdapter.equipo}"></th>
-				<th><a th:href="@{/jugador/editar/}+${jugadorAdapter.edad}"
+				<th><a th:href="@{/jugador/editar/}+${jugadorAdapter.idjugador}"
 					class="btn btn-warning">Editar</a> <a
-					th:href="@{/jugador/eliminar/}+${jugadorAdapter.edad}"
+					th:href="@{/jugador/eliminar/}+${jugadorAdapter.idjugador}"
 					class="btn btn-danger">Eliminar</a>
 			</tr>
 
@@ -53,8 +54,7 @@
 
 
 	<div>
-		<a class="btn btn-success  btn-lg btn-block" href="http://localhost:8080/">volver al menu principal</a>
-
+		<a href="#" id="backLink" class="btn btn-success btn-lg btn-block" >Atras</a>
 	</div>
 
 </body>
