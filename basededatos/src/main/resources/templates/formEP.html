@@ -15,6 +15,7 @@
 	integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
 	crossorigin="anonymous"></script>
 <link rel="stylesheet" type="text/css" href="../css/list.css">
+<link id="contextPathHolder" th:href="@{__${#httpServletRequest.requestURI}__}"/>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous">
@@ -34,23 +35,24 @@
 					<div class="card-body">
 
 						<div class="mb-3 row form-group">
-							<label for="exampleDataList" class="col-sm-2 col-form-label">Posicion</label>
+							<label for="idPosicion" class="col-sm-2 col-form-label">Posicion</label>
 							<div class="col-sm-9">
-								<select id="idPos" th:field="*{posicion}"
+								<select id="idPosicion" th:field="*{posicion}"
 									class="form-select form-select-lg  form-control mb-3">
-									<option selected value="24">Ninguna</option>
-									<option  value="-1">Todas</option>
+									
 								</select>
+								<input  th:field="*{posicion}" type="number" class="form-control d-none"
+									id="idPosis">
 							</div>
 						</div>
 						<div class="mb-3 row form-group">
-							<label for="exampleDataList" class="col-sm-2 col-form-label">Equipo</label>
+							<label for="idEquipo" class="col-sm-2 col-form-label">Equipo</label>
 							<div class="col-sm-9">
-								<select id="idEqui" th:field="*{equipo}"
+								<select id="idEquipo" th:field="*{equipo}"
 									class="form-select form-select-lg mb-3 ">
-									<option  selected value="15">Ninguno</option>
-									<option  value="-1">Todos</option>
 								</select>
+								<input  th:field="*{equipo}" type="number" class="form-control d-none"
+									id="idEquip">
 							</div>
 						</div>
 

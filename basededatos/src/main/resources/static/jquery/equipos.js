@@ -3,16 +3,15 @@ $(document).ready(function() {
 		event.preventDefault();
 		history.back(1);
 	});
-	$("#regTitle").html("Hello World");
 	$("#btp").click(function() {
 		var nom = $("#idNombre").val();
 		var div = $("#idDivision").val();
 		var datoss = $("#idExc")[0];
-		var letras = new RegExp('^[A-Za-z\s]*$');
+		var letras = new RegExp('^[A-Za-z\s ]*$');
 		var divNom = $("#idDivNom")[0];
 		var divDiv = $("#idDivDiv")[0];
 		if (nom != "" && div != "" && letras.test(nom) && letras.test(div)) {
-			return OK;
+			return "OK";
 		} else {
 			divNom.innerHTML = ` `;
 			if (nom == "") {

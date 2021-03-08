@@ -5,9 +5,9 @@ $(document).ready(function() {
 	});
 	$("#btp").click(function() {
 		var nom = $("#idNombre").val();
-		var letras = new RegExp('^[a-zA-Z]*$');
+		var letras = new RegExp('^[A-Za-z\s ]*$');
 		if (nom != "" && letras.test(nom)) {
-			return OK;
+			return "OK";
 		}
 		var d = $("#idDivNom")[0];
 		

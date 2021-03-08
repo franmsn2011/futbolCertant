@@ -26,7 +26,7 @@
 <body background="https://fondosmil.com/fondo/30398.jpg">
 	<div class="container mt-4">
 		<div class="col-sm-6">
-			<form th:action="@{/jugador/seve}" th:object=${jugador} method="post">
+			<form id="idFormulario"th:action="@{/jugador/seve}" th:object=${jugador} method="post">
 				<div class="card">
 					<div class="card-header">
 						<h3>Jugador</h3>
@@ -41,21 +41,24 @@
 							</div>
 						</div>
 						<div class="mb-3 row form-group">
-							<label for="exampleDataList" class="col-sm-3 col-form-label">Posicion</label>
+							<label for="idPosicion" class="col-sm-3 col-form-label">Posicion</label>
 							<div class="col-sm-9">
-								<select id="idPos" th:field="*{posicion}" class="form-select form-select-lg mb-3">
-									<option selected value="24">Ninguna</option>
+								<select id="idPosicion" th:field="*{posicion}" class="form-select form-select-lg mb-3">
+									
 								</select>
+								<input  th:field="*{posicion}" type="number" class="form-control d-none"
+									id="idPosis">
 							</div>
 						</div>
-						<div class="mb-3 row form-group">
-							<label for="exampleDataList" class="col-sm-3 col-form-label">Equipo</label>
+						<div class="mb-3 row form-group"  >
+							<label for="idEquipo" class="col-sm-3 col-form-label">Equipo</label>
 							<div class="col-sm-9">
-								<select id="idEqui" th:field="*{equipo}"
+								<select id="idEquipo" type="number" th:field="*{equipo}"
 									class="form-select form-select-lg mb-3 ">
-									<option selected value="15">Ninguno </option>
 								</select>
 							</div>
+							<input  th:field="*{equipo}" type="number" class="form-control d-none"
+									id="idEquip">
 						</div>
 
 
@@ -72,7 +75,7 @@
 
 							<label class="col-sm-3 col-form-label" for="idDni">DNI</label>
 							<div class="col-sm-9"  >
-								<input placeholder="Ingrese su DNI" class="form-control"  value id="idDni" th:field="*{dni}"
+								<input placeholder="Ingrese su DNI" class="form-control" onkeydown="javascript: return event.keyCode === 8 || event.keyCode === 46 ? true : !isNaN(Number(event.key))"  value id="idDni" th:field="*{dni}"
 									type="number">
 									<div id="idDivDni"> </div>
 							</div>
@@ -83,7 +86,7 @@
 
 							<label class="col-sm-3 col-form-label" for="idEdad">Edad</label>
 							<div class="col-sm-9" >
-								<input placeholder="Ingrese su edad" th:field="*{edad}" value type="number" class="form-control"
+								<input placeholder="Ingrese su edad" onkeydown="javascript: return event.keyCode === 8 || event.keyCode === 46 ? true : !isNaN(Number(event.key))"  th:field="*{edad}" value type="number" class="form-control"
 									id="idedad">
 									<div id="idDivEdad"></div>
 							</div>
@@ -95,7 +98,7 @@
 							<div class="col-sm-9">
 								 <select id="idEstado" th:field="*{estadoCivil}"
 									class="form-select form-select-lg mb-3 ">
-									<option selected value="Soltero">Soltero</option>
+									<option value="Soltero">Soltero</option>
 									<option value="Casado">Casado</option>
 									<option value="Divorciado">divorciado</option>
 									<option value="Viudo">viudo</option>

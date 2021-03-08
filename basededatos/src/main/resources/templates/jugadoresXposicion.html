@@ -13,7 +13,7 @@
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous">
   </script>
-  <link rel="stylesheet" type="text/css" href="../css/list.css">
+  <link id="contextPathHolder" th:href="@{__${#httpServletRequest.requestURI}__}"/>
 <script src="/jQuery/funciones.js"></script>
 </head>
 <body id="idFondo" background="https://img.fifa.com/image/upload/t_l1/dq6tczszvf4ebburt5b8.jpg">

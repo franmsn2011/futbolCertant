@@ -14,4 +14,5 @@ public interface JugadorRespository extends JpaRepository<Jugador, Serializable>
 	public List<Jugador> findByPosicionAndEquipo(int posicion, int equipo);
 	public List<Jugador> findByPosicion(int posicion);
 	public List<Jugador> findByEquipo(int equipo);
+	public List<Jugador> findByDni(int dni);
 }

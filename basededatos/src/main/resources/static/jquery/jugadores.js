@@ -1,9 +1,31 @@
-//const url = '@{posicion/posis}';
-const urlp = '../posis';
-const urlE = '../equip';
-$(document).ready(function() {
 
-	$.get(urlE, function(dataE) {
+
+$(document).ready(function() {
+	var CONTEXT_PATH = $('#contextPathHolder').attr('href');
+	var contador=CONTEXT_PATH.split("/");
+	var uurlp="/posis";
+	var uurle="/equip";
+	var i=0;
+	for(i=0;i<contador.length-2;i++){
+		uurlp="../"+uurlp;
+		uurle="../"+uurle;
+	}
+
+	$.get(uurle, function(dataE) {
+		var objE = JSON.parse(dataE);
+		var datossE = $("#idEquipo")[0];
+		var equipo = $("#idEquip").val();
+		     datossE.innerHTML = `     <option  value="15">Ninguno </option>`;
+		for (a in objE.equipos) { 
+			if(objE.equipos[a].idEquipo == equipo){
+					datossE.innerHTML += `<option selected value='${objE.equipos[a].idEquipo}'>${objE.equipos[a].nombre}</option>`;
+			
+			}else{
+			datossE.innerHTML += `<option value='${objE.equipos[a].idEquipo}'>${objE.equipos[a].nombre}</option>`;
+		}}
+	});
+	/*
+	$.get(uurle, function(dataE) {
 		var objE = JSON.parse(dataE);
 		var datossE = $("#idEqui")[0];
 		for (a in objE.equipos) {
@@ -11,20 +33,28 @@ $(document).ready(function() {
 		}
 	});
 
-
-
-
-/*
-	var ru = $('#ruta');
-	var CONTEXT_PATH = $('#contextPathHolder').attr('href');
-	console.log(CONTEXT_PATH);
-	*/
-	$.get(urlp, function(data) {
+*/
+	/*
+		
+		var CONTEXT_PATH = $('#contextPathHolder').attr('href');
+		console.log(CONTEXT_PATH);
+		*/
+		
+	$.get(uurlp, function(data) {
 		var obj = JSON.parse(data);
-		var datoss = $("#idPos")[0];
+		var datoss = $("#idPosicion")[0];
+		var posicionDefauld = $("#idPosis").val();
+		datoss.innerHTML = `<option  value="24">Ninguna</option>`
+		
 		for (i in obj.posiciones) {
+			if(obj.posiciones[i].idPosicion==posicionDefauld){
+				datoss.innerHTML += `
+  		<option selected value='${obj.posiciones[i].idPosicion}'>${obj.posiciones[i].nombre}</option>`;
+			
+			}else{
 			datoss.innerHTML += `
   		<option value='${obj.posiciones[i].idPosicion}'>${obj.posiciones[i].nombre}</option>`;
+			}
 		}
 	});
 
@@ -37,9 +67,9 @@ $(document).ready(function() {
 		var datoss = $("#idExc")[0];
 		var datos;
 		var numero = new RegExp('^[0-9]*$');
-		var letras = new RegExp('^[A-Za-z\s]*$');
-		if (nom != "" && edad != "" && edad != "0" && dn != "" && dn != "0" && numero.test(dn) && numero.test(edad) && letras.test(nom)) {
-			return OK;
+		var letras = new RegExp('^[A-Za-z\s ]*$');
+		if (nom != "" && edad != "" && edad != "0"  && parseInt(edad) <=100 && parseInt(edad) >=16 && dn.length==8 && dn != "" && dn != "0" && numero.test(dn) && numero.test(edad) && letras.test(nom)) {
+			return "OK";
 		} else {
 			datos = $("#idDivNombre")[0];
 			datos.innerHTML = ` `;
@@ -53,15 +83,24 @@ $(document).ready(function() {
 
 			if (edad == "" || edad == "0") {
 				datos.innerHTML = `<h5 class="text-danger">Tiene que ingresar una edad</h5>`;
-			} else if (numero.test(edad) == false) {
+			}else if (numero.test(edad) == false) {
 				datos.innerHTML = `<h5 class="text-danger">Error la edad no puede contener caracteres alfanumericos</h5>`;
+			} else if(parseInt(edad) <=16){
+				datos.innerHTML = `<h5 class="text-danger">Tiene que ingresar una edad mayor a 15</h5>`;
+			} else if(parseInt(edad) >=100){
+				datos.innerHTML = `<h5 class="text-danger">Tiene que ingresar una edad menor a 100</h5>`;
 			}
+			
+			
+			
 			datos = $("#idDivDni")[0];
 			datos.innerHTML = ` `;
 			if (dn == "" || dn == "0") {
 				datos.innerHTML = `<h5 class="text-danger">Tiene que ingresar una dni</h5>`;
 			} else if (numero.test(dn) == false) {
 				datos.innerHTML = `<h5 class="text-danger">Error el dni no puede contener caracteres alfanumericos</h5>`;
+			} else if(parseInt(dn) >100000000 || parseInt(dn) <9999999){
+				datos.innerHTML = `<h5 class="text-danger">Tiene que ingresar una dni de 8 cifras</h5>`;
 			}
 		}
 		return false;

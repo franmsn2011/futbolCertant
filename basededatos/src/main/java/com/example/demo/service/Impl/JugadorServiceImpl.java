@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Jugador;
 import com.example.demo.excepcion.EstadoCivilException;
+import com.example.demo.excepcion.JugadorExistenteException;
 import com.example.demo.repository.JugadorRespository;
 import com.example.demo.service.JugadorService;
 
@@ -35,6 +36,9 @@ public class JugadorServiceImpl implements JugadorService {
 		} else {
 			throw new EstadoCivilException("ERROR: El estado civil es invalido");
 
+		}
+		if(jugadorRepository.findByDni(jugador.getDni()).isEmpty()==false) {
+			throw new JugadorExistenteException("ERROR: El jugador con ese dni ya existe");
 		}
 		return jugadorRepository.save(jugador);
 	}

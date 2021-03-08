@@ -14,16 +14,16 @@
 	<table class="table table-striped bg-info text-white">
 		<thead>
 			<tr>
-				<th>Nombre</th>
 				<th>id del equipo</th>
+				<th>Nombre</th>
 				<th>Divicion</th>
 				<th>ACCION</th>
 			</tr>
 		</thead>
 		<tbody th:each="equipo : ${equipos}" class="table-striped text-white">
 			<tr>
-				<th th:text="${equipo.nombre}"> </th>
 				<th th:text="${equipo.idEquipo}"> </th>
+				<th th:text="${equipo.nombre}"> </th>
 				<th th:text="${equipo.division}"> </th>
 				<th><a th:href="@{/equipo/editar/}+${equipo.idEquipo}" class="btn btn-warning">Editar</a>
 				<a  th:href="@{/equipo/eliminar/}+${equipo.idEquipo}" class="btn btn-danger">Eliminar</a>
