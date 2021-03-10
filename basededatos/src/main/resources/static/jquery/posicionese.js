@@ -4,7 +4,7 @@ $(document).ready(function() {
 		history.back(1);
 	});
 	$("#btp").click(function() {
-		var nom = $("#idNombre").val();
+		var nom = $.trim($("#idNombre").val());
 		var letras = new RegExp('^[A-Za-z\s ]*$');
 		if (nom != "" && letras.test(nom)) {
 			return "OK";

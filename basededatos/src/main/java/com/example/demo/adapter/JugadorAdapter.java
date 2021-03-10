@@ -1,24 +1,16 @@
 package com.example.demo.adapter;
 
-public class JugadorAdapter {
-	private int idjugador;
-	private String nombre;
-	private int dni;
-	private int edad;
-	private String posicion;
-	private String estadoCivil;
-	private String equipo;
+import java.util.ArrayList;
+import java.util.List;
 
-	public JugadorAdapter(int idjugador, String nombre, int dni, int edad, String posicion, String estadoCivil,
-			String equipo) {
+import com.example.demo.entity.Jugador;
+
+public class JugadorAdapter {
+	private Jugador jugador;
+
+	public JugadorAdapter(Jugador jugador) {
 		super();
-		this.idjugador = idjugador;
-		this.nombre = nombre;
-		this.dni = dni;
-		this.edad = edad;
-		this.posicion = posicion;
-		this.estadoCivil = estadoCivil;
-		this.equipo = equipo;
+		this.jugador = jugador;
 	}
 
 	public JugadorAdapter() {
@@ -26,117 +18,38 @@ public class JugadorAdapter {
 	}
 
 	public int getIdjugador() {
-		return idjugador;
-	}
-
-	public void setIdjugador(int idjugador) {
-		this.idjugador = idjugador;
+		return jugador.getIdjugador();
 	}
 
 	public String getNombre() {
-		return nombre;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
+		return jugador.getNombre();
 	}
 
 	public int getDni() {
-		return dni;
-	}
-
-	public void setDni(int dni) {
-		this.dni = dni;
+		return jugador.getDni();
 	}
 
 	public int getEdad() {
-		return edad;
-	}
-
-	public void setEdad(int edad) {
-		this.edad = edad;
+		return jugador.getEdad();
 	}
 
 	public String getPosicion() {
-		return posicion;
-	}
-
-	public void setPosicion(String posicion) {
-		this.posicion = posicion;
+		return jugador.getDescripcionPosicion();
 	}
 
 	public String getEstadoCivil() {
-		return estadoCivil;
-	}
-
-	public void setEstadoCivil(String estadoCivil) {
-		this.estadoCivil = estadoCivil;
+		return jugador.getEstadoCivil();
 	}
 
 	public String getEquipo() {
-		return equipo;
+		return jugador.getDescripcionEquipo();
 	}
 
-	public void setEquipo(String equipo) {
-		this.equipo = equipo;
-	}
-
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + dni;
-		result = prime * result + edad;
-		result = prime * result + ((equipo == null) ? 0 : equipo.hashCode());
-		result = prime * result + ((estadoCivil == null) ? 0 : estadoCivil.hashCode());
-		result = prime * result + idjugador;
-		result = prime * result + ((nombre == null) ? 0 : nombre.hashCode());
-		result = prime * result + ((posicion == null) ? 0 : posicion.hashCode());
-		return result;
-	}
-
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		JugadorAdapter other = (JugadorAdapter) obj;
-		if (dni != other.dni)
-			return false;
-		if (edad != other.edad)
-			return false;
-		if (equipo == null) {
-			if (other.equipo != null)
-				return false;
-		} else if (!equipo.equals(other.equipo))
-			return false;
-		if (estadoCivil == null) {
-			if (other.estadoCivil != null)
-				return false;
-		} else if (!estadoCivil.equals(other.estadoCivil))
-			return false;
-		if (idjugador != other.idjugador)
-			return false;
-		if (nombre == null) {
-			if (other.nombre != null)
-				return false;
-		} else if (!nombre.equals(other.nombre))
-			return false;
-		if (posicion == null) {
-			if (other.posicion != null)
-				return false;
-		} else if (!posicion.equals(other.posicion))
-			return false;
-		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "JugadorAdapter [idjugador=" + idjugador + ", nombre=" + nombre + ", dni=" + dni + ", edad=" + edad
-				+ ", posicion=" + posicion + ", estadoCivil=" + estadoCivil + ", equipo=" + equipo + "]";
+	public static List<JugadorAdapter> createListOfAdapters(List<Jugador> jugadores){
+		List<JugadorAdapter> listJugadorAdapter= new ArrayList<JugadorAdapter>();
+		for (int i = 0; i < jugadores.size(); i++)
+		listJugadorAdapter.add(new JugadorAdapter(jugadores.get(i)));
+		return listJugadorAdapter; 
 	}
 
 }

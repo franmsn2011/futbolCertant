@@ -24,21 +24,7 @@ $(document).ready(function() {
 			datossE.innerHTML += `<option value='${objE.equipos[a].idEquipo}'>${objE.equipos[a].nombre}</option>`;
 		}}
 	});
-	/*
-	$.get(uurle, function(dataE) {
-		var objE = JSON.parse(dataE);
-		var datossE = $("#idEqui")[0];
-		for (a in objE.equipos) {
-			datossE.innerHTML += `<option value='${objE.equipos[a].idEquipo}'>${objE.equipos[a].nombre}</option>`;
-		}
-	});
-
-*/
-	/*
-		
-		var CONTEXT_PATH = $('#contextPathHolder').attr('href');
-		console.log(CONTEXT_PATH);
-		*/
+	
 		
 	$.get(uurlp, function(data) {
 		var obj = JSON.parse(data);
@@ -60,7 +46,7 @@ $(document).ready(function() {
 
 
 	$("#btp").click(function() {
-		var nom = $("#idNombre").val();
+		var nom = $.trim($("#idNombre").val());
 		var edad = $("#idedad").val();
 		var dn = $("#idDni").val();
 		var ec = $("#idEstado").val();
@@ -68,15 +54,17 @@ $(document).ready(function() {
 		var datos;
 		var numero = new RegExp('^[0-9]*$');
 		var letras = new RegExp('^[A-Za-z\s ]*$');
-		if (nom != "" && edad != "" && edad != "0"  && parseInt(edad) <=100 && parseInt(edad) >=16 && dn.length==8 && dn != "" && dn != "0" && numero.test(dn) && numero.test(edad) && letras.test(nom)) {
+		if (nom != "" && edad != "" && edad != "0"  && parseInt(edad) <100 && parseInt(edad) >=16 && dn.length==8 && dn != "" && dn != "0" && numero.test(dn) && numero.test(edad) && letras.test(nom)) {
 			return "OK";
 		} else {
-			datos = $("#idDivNombre")[0];
-			datos.innerHTML = ` `;
+			datos = $("#idDivNombre");
+			datos.html('');
 			if (nom == "") {
-				datos.innerHTML = `<h5 class="text-danger">Tiene que ingresar un nombre</h5>`;
+				datos.slideUp();
+				datos.html('<h5 class="text-danger">Tiene que ingresar un nombre</h5>');
+				datos.slideDown();
 			} else if (letras.test(nom) == false) {
-				datos.innerHTML = `<h5 class="text-danger">Error el nombre ingresado no puede contener numeros</h5>`;
+				datos.html('<h5 class="text-danger">Error el nombre ingresado no puede contener numeros</h5>');
 			}
 			datos = $("#idDivEdad")[0];
 			datos.innerHTML = ` `;

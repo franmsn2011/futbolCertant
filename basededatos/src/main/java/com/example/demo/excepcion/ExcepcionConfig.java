@@ -43,7 +43,17 @@ public class ExcepcionConfig {
 	public ResponseEntity<?> equipoErrorDatosIguales(EquipoErrorDatosIguales e){
 		return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
 	}
-	
-	
+	@ExceptionHandler(JugadorEdadErronea.class)
+	public ResponseEntity<?> jugadorEdadErronea(JugadorEdadErronea e){
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+	}
+	@ExceptionHandler(JugadorDniErroneo.class)
+	public ResponseEntity<?> jugadorDniErroneo(JugadorDniErroneo e){
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+	}
+	@ExceptionHandler(DatosNull.class)
+	public ResponseEntity<?> datosNull(DatosNull e){
+		return ResponseEntity.status(HttpStatus.CONFLICT).body(e.getMessage());
+	}
 	
 }

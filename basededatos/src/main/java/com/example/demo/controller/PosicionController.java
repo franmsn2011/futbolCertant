@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,40 +32,18 @@ public class PosicionController {
 
 	@GetMapping({ "/", "", "/list" })
 	public ModelAndView listAllPosicion() {
-		// HttpServletRequest request
 		ModelAndView mav = new ModelAndView("list");
-		List<PosicionAdapter> list= new ArrayList<PosicionAdapter>();
-		List<Posicion> listPos=posicionService.listAllPosicion();
-		Posicion aux= new Posicion();
-		
-		for (int i = 0; i < listPos.size(); i++) {
-			aux = listPos.get(i);
-			String e = "Ninguno";
-			if(aux.isAtrasadoAdelantado()==true) {
-				e="Si";
-			}else {
-				e="No";
-			}
-			
-			list.add(new PosicionAdapter(aux.getIdPosicion(),aux.getNombre(),e));
-		}
-		
-		
-		mav.addObject("posiciones", list);
+		mav.addObject("posiciones", listAllPosicion(posicionService.listAllPosicion()));
 		mav.addObject("poss", new Posicion());
 		return mav;
 	}
-
+	public List<PosicionAdapter> listAllPosicion(List<Posicion> list){
+		return PosicionAdapter.createListOfAdapters(list);
+	}
+	
 	@GetMapping("/new/")
 	public String agregar(Model model) {
 		model.addAttribute("posicion", new Posicion());
-		return "formPos";
-	}
-
-	@GetMapping("/new/{excepcion}")
-	public String agregarex(@PathVariable String excepcion, Model model) {
-		model.addAttribute("posicion", new Posicion());
-		model.addAttribute("excepcion", excepcion);
 		return "formPos";
 	}
 
@@ -75,7 +52,6 @@ public class PosicionController {
 		try {
 			posicionService.addPosicion(p);
 		} catch (Exception e) {
-			System.out.println(e.getClass().toString());
 			model.addAttribute("excepcion", e.getMessage());
 			return "formPos";
 		}

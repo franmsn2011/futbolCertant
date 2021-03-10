@@ -22,12 +22,12 @@ public class Jugador implements Serializable {
 	private int edad;
 	@Column
 	private int posicion;
+	private String descripcionPosicion;
 	@Column
 	private String estadoCivil;
-	// @ManyToOne (fetch = FetchType.LAZY)
-	// @JoinColumn(name= "equipo")
 	@Column
 	private int equipo;
+	private String descripcionEquipo;
 
 	public Jugador(int idjugador, String nombre, int dni, int edad, int posicion, String estadoCivil) {
 		super();
@@ -160,6 +160,22 @@ public class Jugador implements Serializable {
 	public String toString() {
 		return "Jugador [idjugador=" + idjugador + ", nombre=" + nombre + ", dni=" + dni + ", edad=" + edad
 				+ ", posicion=" + posicion + ", estadoCivil=" + estadoCivil + ", Equipo=" + equipo + "]\n";
+	}
+
+	public String getDescripcionEquipo() {
+		return descripcionEquipo;
+	}
+
+	public void setDescripcionEquipo(String descripcionEquipo) {
+		this.descripcionEquipo = descripcionEquipo;
+	}
+
+	public String getDescripcionPosicion() {
+		return descripcionPosicion;
+	}
+
+	public void setDescripcionPosicion(String descripcionPosicion) {
+		this.descripcionPosicion = descripcionPosicion;
 	}
 
 }

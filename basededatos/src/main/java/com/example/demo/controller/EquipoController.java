@@ -62,6 +62,7 @@ public class EquipoController {
 
 	@GetMapping("/eliminar/{idEquipo}")
 	public String delete(Model model, @PathVariable int idEquipo) {
+		//elimino el equipo de todos los jugadores que tengas este equipo
 		jugadorService.EliminaEquipoDeJugadores(idEquipo);
 		equipoService.delete(idEquipo);
 		return "redirect:/equipo/list";

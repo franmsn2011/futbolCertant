@@ -1,6 +1,5 @@
 package com.example.demo.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -38,24 +37,8 @@ public class JugadorController {
 
 	@GetMapping("/list")
 	public ModelAndView listAllJugador() {
-		List<JugadorAdapter> listJugadorAdapter = new ArrayList<JugadorAdapter>();
-		List<Jugador> listJugador = jugadorService.listAllJugador();
-		Jugador aux = new Jugador();
-		for (int i = 0; i < listJugador.size(); i++) {
-			aux = listJugador.get(i);
-			String e = "Ninguno";
-			if (aux.getEquipo() != 0) {
-				e = EquipoService.listarId(aux.getEquipo()).get().getNombre();
-			}
-			String p = "Ninguna";
-			if (aux.getPosicion() != 0) {
-				p = posicionService.listarId(aux.getPosicion()).get().getNombre();
-			}
-			listJugadorAdapter.add(new JugadorAdapter(aux.getIdjugador(), aux.getNombre(), aux.getDni(), aux.getEdad(),
-					p, aux.getEstadoCivil(), e));
-		}
 		ModelAndView mav = new ModelAndView("listJugadores");
-		mav.addObject("jugadores", listJugadorAdapter);
+		mav.addObject("jugadores", listAllJugador(jugadorService.listAllJugador()));
 		mav.addObject("posicion", posicionService);
 		return mav;
 	}
@@ -63,52 +46,21 @@ public class JugadorController {
 	@GetMapping("/verJugadores/{idPosicion}/{idEquipo}")
 	public ModelAndView verJugadores2(@PathVariable int idPosicion, @PathVariable int idEquipo, Model model) {
 		List<Jugador> listJuga = jugadorService.listarJugadoresxP(idPosicion, idEquipo);
-		String respuesta = "Nada";
-		if (idEquipo == -1 || idPosicion == -1) {
-			if (idEquipo == -1) {
-				respuesta = "Estos son los jugadores que tiene la posicion "
-						+ posicionService.listarId(idPosicion).get().getNombre();
-			} else {
-				respuesta = "Estos son los jugadores que tiene el equipo "
-						+ EquipoService.listarId(idEquipo).get().getNombre();
-			}
-		} else {
-
-			if (idEquipo == 15 && idPosicion == 24) {
-				respuesta = "Estos son los jugadores que no tiene ningun equipo y posicion";
-			} else {
-				respuesta = "Estos son los jugadores que tiene la posicion "
-						+ posicionService.listarId(idPosicion).get().getNombre() + " y jugan en el equipo "
-						+ EquipoService.listarId(idEquipo).get().getNombre();
-			}
-
-		}
 		ModelAndView mav = new ModelAndView("jugadoresXposicion");
-		mav.addObject("respuesta", respuesta);
+		mav.addObject("consultoPorEquipo", idPosicion==-1);
+		mav.addObject("consultoPorPosicion", idEquipo == -1);
+		mav.addObject("consultaPorUnoSolo", idEquipo == -1 || idPosicion == -1);
+		mav.addObject("noTieneEquipoNiPosicion", idEquipo == 15 && idPosicion == 24);
+		if(idPosicion!=-1) mav.addObject("nombrePosicion", posicionService.listarId(idPosicion).get().getNombre());
+		if(idEquipo!=-1) mav.addObject("nombreEquipo", EquipoService.listarId(idEquipo).get().getNombre());
 		mav.addObject("jugadores", listAllJugador(listJuga));
 		return mav;
 	}
-
+	//tranformo una lista de jugadores en una lista de JugadorAdapter
 	public List<JugadorAdapter> listAllJugador(List<Jugador> list) {
-		List<JugadorAdapter> listJugadorAdapter = new ArrayList<JugadorAdapter>();
-		List<Jugador> listJugador = list;
-		Jugador aux = new Jugador();
-		for (int i = 0; i < listJugador.size(); i++) {
-			aux = listJugador.get(i);
-			String e = "Ninguno";
-			if (aux.getEquipo() != 0) {
-				e = EquipoService.listarId(aux.getEquipo()).get().getNombre();
-			}
-			String p = "Ninguna";
-			if (aux.getPosicion() != 0) {
-				p = posicionService.listarId(aux.getPosicion()).get().getNombre();
-			}
-			listJugadorAdapter.add(new JugadorAdapter(aux.getIdjugador(), aux.getNombre(), aux.getDni(), aux.getEdad(),
-					p, aux.getEstadoCivil(), e));
-		}
-		return listJugadorAdapter;
+		return JugadorAdapter.createListOfAdapters(list);
 	}
-
+	//spring.jpa.hibernate.ddl-auto=update
 	@GetMapping("/new")
 	public String agregar(Model model) {
 		model.addAttribute("jugador", new Jugador());

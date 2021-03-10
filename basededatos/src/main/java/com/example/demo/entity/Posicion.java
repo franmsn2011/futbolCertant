@@ -20,18 +20,19 @@ public class Posicion implements Serializable {
 	private String nombre;
 	@Column
 	private boolean atrasadoAdelantado;
-
+	
 	public Posicion(int idPosicion, String nombre, boolean atrasadoAdelantado) {
 		super();
 		this.idPosicion = idPosicion;
 		this.nombre = nombre;
 		this.atrasadoAdelantado = atrasadoAdelantado;
 	}
-
+	
 	public Posicion() {
 		super();
 	}
 
+	
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
@@ -58,6 +59,16 @@ public class Posicion implements Serializable {
 
 	public void setAtrasadoAdelantado(boolean atrasadoAdelantado) {
 		this.atrasadoAdelantado = atrasadoAdelantado;
+	}
+
+	
+
+	
+
+	@Override
+	public String toString() {
+		return "Posicion [idPosicion=" + idPosicion + ", nombre=" + nombre + ", atrasadoAdelantado="
+				+ atrasadoAdelantado + "]";
 	}
 
 	@Override
@@ -90,11 +101,6 @@ public class Posicion implements Serializable {
 			return false;
 		return true;
 	}
-
-	@Override
-	public String toString() {
-		return "Posicion [idPosicion=" + idPosicion + ", nombre=" + nombre + ", atrasadoAdelantado="
-				+ atrasadoAdelantado + "]\n";
-	}
+	
 
 }

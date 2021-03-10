@@ -4,8 +4,8 @@ $(document).ready(function() {
 		history.back(1);
 	});
 	$("#btp").click(function() {
-		var nom = $("#idNombre").val();
-		var div = $("#idDivision").val();
+		var nom = $.trim($("#idNombre").val());
+		var div = $.trim($("#idDivision").val());
 		var datoss = $("#idExc")[0];
 		var letras = new RegExp('^[A-Za-z\s ]*$');
 		var divNom = $("#idDivNom")[0];

@@ -12,12 +12,37 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"
 	integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
 	crossorigin="anonymous">
-  </script>
-  <link id="contextPathHolder" th:href="@{__${#httpServletRequest.requestURI}__}"/>
+	
+</script>
+<link id="contextPathHolder"
+	th:href="@{__${#httpServletRequest.requestURI}__}" />
 <script src="/jQuery/funciones.js"></script>
 </head>
-<body id="idFondo" background="https://img.fifa.com/image/upload/t_l1/dq6tczszvf4ebburt5b8.jpg">
-	<h1 th:text="${respuesta}" class="card-title bg-white"></h1>
+<body id="idFondo"
+	background="https://img.fifa.com/image/upload/t_l1/dq6tczszvf4ebburt5b8.jpg">
+	<div class="card-title bg-white">
+	<div th:if="${consultaPorUnoSolo == true}">
+		<h2 th:if="${consultoPorPosicion == true}">
+			Estos son los jugadores que tiene la posicion <span
+				th:text="${nombrePosicion}"></span>
+		</h2>
+		<h2 th:unless="${consultoPorPosicion == true}">
+			Estos son los jugadores que tiene el equipo <div
+				th:text="${nombreEquipo}"></div>
+		</h2>
+	</div>
+	<div th:unless="${consultaPorUnoSolo == true}">
+		<h2 th:if="${noTieneEquipoNiPosicion== true}">Estos son los
+			jugadores que no tiene ningun equipo y posicion</h2>
+		<h2 th:unless="${noTieneEquipoNiPosicion== true}">
+			Estos son los jugadores que tiene la posicionnnnn <span
+				th:text="${nombrePosicion}"></span><span> y el juegan en el equipo</span> <span
+				th:text="${nombreEquipo}"></span>
+
+		</h2>
+	</div>
+	</div>
+<!-- 	<h1 th:text="${respuesta}" class="card-title bg-white"></h1> -->
 	<table class="table table-striped bg-info text-white">
 		<thead>
 			<tr>
@@ -40,7 +65,8 @@
 				<th th:text="${jugadorAdapter.posicion}"></th>
 				<th th:text="${jugadorAdapter.estadoCivil}"></th>
 				<th th:text="${jugadorAdapter.equipo}"></th>
-				<th><a th:href="@{/jugador/editar/}+${jugadorAdapter.idjugador}"
+				<th><a
+					th:href="@{/jugador/editar/}+${jugadorAdapter.idjugador}"
 					class="btn btn-warning">Editar</a> <a
 					th:href="@{/jugador/eliminar/}+${jugadorAdapter.idjugador}"
 					class="btn btn-danger">Eliminar</a>
@@ -54,7 +80,7 @@
 
 
 	<div>
-		<a href="#" id="backLink" class="btn btn-success btn-lg btn-block" >Atras</a>
+		<a href="#" id="backLink" class="btn btn-success btn-lg btn-block">Atras</a>
 	</div>
 
 </body>
