@@ -15,9 +15,7 @@ import com.example.demo.excepcion.JugadorDniErroneo;
 import com.example.demo.excepcion.JugadorEdadErronea;
 import com.example.demo.excepcion.JugadorExistenteException;
 import com.example.demo.repository.JugadorRespository;
-import com.example.demo.service.EquipoService;
 import com.example.demo.service.JugadorService;
-import com.example.demo.service.PosicionService;
 
 @Service("JugadorService")
 public class JugadorServiceImpl implements JugadorService {
@@ -25,16 +23,11 @@ public class JugadorServiceImpl implements JugadorService {
 	@Autowired
 	@Qualifier("jugadorRepository")
 	private JugadorRespository jugadorRepository;
-	@Autowired
-	private EquipoService equipoService;
-	@Autowired
-	private PosicionService posicionService;
 
 	@Override
 	public List<Jugador> listAllJugador() {
 
 		List<Jugador> list = jugadorRepository.findAll();
-		setDescripcionesJugador(list);
 		return list;
 	}
 
@@ -105,7 +98,6 @@ public class JugadorServiceImpl implements JugadorService {
 				list = jugadorRepository.findByPosicion(idPosicion);
 			}
 		}
-		setDescripcionesJugador(list);
 		return list;
 	}
 
@@ -144,12 +136,5 @@ public class JugadorServiceImpl implements JugadorService {
 			addJugador(aux);
 		}
 
-	}
-
-	private void setDescripcionesJugador(List<Jugador> list) {
-		for (Jugador jugador : list) {
-			jugador.setDescripcionEquipo(equipoService.listarId(jugador.getEquipo()).get().getNombre());
-			jugador.setDescripcionPosicion(posicionService.listarId(jugador.getPosicion()).get().getNombre());
-		}
 	}
 }

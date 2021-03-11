@@ -9,17 +9,19 @@ $(document).ready(function() {
 		if (nom != "" && letras.test(nom)) {
 			return "OK";
 		}
-		var d = $("#idDivNom")[0];
-		
+		var d = $("#idDivNom");
+		d.slideUp();
 		if (nom == "") {
-			d.innerHTML = '<h5 class="text-danger">Ingrese el nombre por favor</h5>';
+			d.html('<h5 class="text-danger">Ingrese el nombre por favor</h5>');
+			d.slideDown();
 		} else {
-			if (letras.test(nom) == false) {		
-				d.innerHTML = '<h5 class="text-danger">El nombre solo puede tener caracteres alfabeticos</h5>';		
+			if (letras.test(nom) == false) {
+				d.html('<h5 class="text-danger">El nombre solo puede tener caracteres alfabeticos</h5>');
+				d.slideDown();		
 			}
 		}
-		var datoss = $("#idExc")[0];
-		datoss.innerHTML = `verifique los datos nuevamente`;
+		var datoss = $("#idExc");
+		datoss.html('verifique los datos nuevamente');
 		return false;
 	});
 

@@ -26,28 +26,28 @@ public class PosicionServiceImpl implements PosicionService {
 		list.remove(new Posicion(24, "Ninguno", false));
 		return list;
 	}
-	
+
 	@Override
 	public Posicion addPosicion(Posicion posicion) {
-		//chequeo que el nombre no este vacio
-		if(posicion.getNombre()==null ) {
-			throw new DatosNull(
-					"No se puede agregar esa posicion porque hay datos vacios");
-	
+		// chequeo que el nombre no este vacio
+		if (posicion.getNombre() == null) {
+			throw new DatosNull("No se puede agregar esa posicion porque hay datos vacios");
+
 		}
-		List<Posicion> list=listAllPosicion();
-		int index=0;
-		boolean encontrado=false;
-		//cargo una lista sin la posicion que quiero agregar/actualizar para buscar si ya esta 
-		while(index<list.size() && encontrado==false) {
-		if(posicion.getIdPosicion()==list.get(index).getIdPosicion()) {
+		List<Posicion> list = listAllPosicion();
+		int index = 0;
+		boolean encontrado = false;
+		// cargo una lista sin la posicion que quiero agregar/actualizar para buscar si
+		// ya esta
+		while (index < list.size() && encontrado == false) {
+			if (posicion.getIdPosicion() == list.get(index).getIdPosicion()) {
 				list.remove(index);
-				encontrado=true;
+				encontrado = true;
 			}
-		index++;
+			index++;
 		}
 		index = 0;
-		//chequeo si esta en la lista
+		// chequeo si esta en la lista
 		while (index < list.size()) {
 			if (list.get(index).getNombre().equalsIgnoreCase(posicion.getNombre())) {
 				if (list.get(index).isAtrasadoAdelantado() == posicion.isAtrasadoAdelantado()) {
@@ -72,7 +72,5 @@ public class PosicionServiceImpl implements PosicionService {
 		posicionRepository.deleteById(idPosicion);
 
 	}
-
-	
 
 }

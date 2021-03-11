@@ -22,17 +22,15 @@ public class Jugador implements Serializable {
 	private int edad;
 	@Column
 	private int posicion;
-	private String descripcionPosicion;
 	@Column
 	private String estadoCivil;
 	@Column
 	private int equipo;
-	private String descripcionEquipo;
 
 	public Jugador(int idjugador, String nombre, int dni, int edad, int posicion, String estadoCivil) {
 		super();
 		this.idjugador = idjugador;
-		this.nombre = nombre;
+		this.nombre = nombre.trim();
 		this.dni = dni;
 		this.edad = edad;
 		this.posicion = posicion;
@@ -162,20 +160,5 @@ public class Jugador implements Serializable {
 				+ ", posicion=" + posicion + ", estadoCivil=" + estadoCivil + ", Equipo=" + equipo + "]\n";
 	}
 
-	public String getDescripcionEquipo() {
-		return descripcionEquipo;
-	}
-
-	public void setDescripcionEquipo(String descripcionEquipo) {
-		this.descripcionEquipo = descripcionEquipo;
-	}
-
-	public String getDescripcionPosicion() {
-		return descripcionPosicion;
-	}
-
-	public void setDescripcionPosicion(String descripcionPosicion) {
-		this.descripcionPosicion = descripcionPosicion;
-	}
 
 }

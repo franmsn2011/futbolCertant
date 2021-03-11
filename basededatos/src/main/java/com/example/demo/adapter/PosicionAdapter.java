@@ -31,30 +31,20 @@ public class PosicionAdapter {
 		return idPosicion;
 	}
 
-	public void setIdPosicion(int idPosicion) {
-		this.idPosicion = idPosicion;
-	}
-
 	public String getNombre() {
 		return nombre;
 	}
 
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
-	}
 
 	public String getAtrasadoAdelantado() {
 		return atrasadoAdelantado;
 	}
 
-	public void setAtrasadoAdelantado(String atrasadoAdelantado) {
-		this.atrasadoAdelantado = atrasadoAdelantado;
-	}
 
 	public static List<PosicionAdapter> createListOfAdapters(List<Posicion> posiciones){
 		List<PosicionAdapter> listPosicionAdapter= new ArrayList<PosicionAdapter>();
 		for (int i = 0; i < posiciones.size(); i++)
-		listPosicionAdapter.add(new PosicionAdapter(posiciones.get(i)));
+			listPosicionAdapter.add(new PosicionAdapter(posiciones.get(i)));
 		return listPosicionAdapter; 
 	}
 	

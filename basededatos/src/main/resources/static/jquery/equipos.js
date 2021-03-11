@@ -6,26 +6,34 @@ $(document).ready(function() {
 	$("#btp").click(function() {
 		var nom = $.trim($("#idNombre").val());
 		var div = $.trim($("#idDivision").val());
-		var datoss = $("#idExc")[0];
 		var letras = new RegExp('^[A-Za-z\s ]*$');
-		var divNom = $("#idDivNom")[0];
-		var divDiv = $("#idDivDiv")[0];
+		var divNom = $("#idDivNom");
+		var divDiv = $("#idDivDiv");
 		if (nom != "" && div != "" && letras.test(nom) && letras.test(div)) {
 			return "OK";
 		} else {
-			divNom.innerHTML = ` `;
+		    divNom.slideUp(250);
+			divNom.html('');
 			if (nom == "") {
-				divNom.innerHTML = '<h5 class="text-danger">Tiene que ingresar un nombre</h5>';
+				
+				divNom.html('<h5 class="text-danger">Tiene que ingresar un nombre</h5>');
+				divNom.slideDown();
 			} else {
-				if (!letras.test(nom))
-					divNom.innerHTML = '<h5 class="text-danger">El nombre solo puede contener caracteres alfanumericos</h5>';
+				if (!letras.test(nom)) {
+					divNom.html('<h5 class="text-danger">El nombre solo puede contener caracteres alfanumericos</h5>');
+					divNom.slideDown();
+				}
 			}
-			divDiv.innerHTML = ` `;
+			divDiv.slideUp(250);
+			divDiv.html('');
 			if (div == "") {
-				divDiv.innerHTML = '<h5 class="text-danger">Tiene que ingresar una Division</h5>';
+				divDiv.html('<h5 class="text-danger">Tiene que ingresar una Division</h5>');
+				divDiv.slideDown();
 			} else {
-				if (!letras.test(div))
-					divDiv.innerHTML = '<h5 class="text-danger">La division solo puede contener caracteres alfanumericos</h5>';
+				if (!letras.test(div)) {
+					divDiv.html('<h5 class="text-danger">La division solo puede contener caracteres alfanumericos</h5>');
+					divDiv.slideDown();
+				}
 			}
 		}
 		return false;

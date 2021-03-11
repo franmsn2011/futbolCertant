@@ -58,37 +58,46 @@ $(document).ready(function() {
 			return "OK";
 		} else {
 			datos = $("#idDivNombre");
+			datos.slideUp();
 			datos.html('');
 			if (nom == "") {
-				datos.slideUp();
 				datos.html('<h5 class="text-danger">Tiene que ingresar un nombre</h5>');
 				datos.slideDown();
 			} else if (letras.test(nom) == false) {
 				datos.html('<h5 class="text-danger">Error el nombre ingresado no puede contener numeros</h5>');
+				datos.slideDown();
 			}
-			datos = $("#idDivEdad")[0];
-			datos.innerHTML = ` `;
-
+			datos = $("#idDivEdad");
+			datos.slideUp();
+			datos.html('');
 			if (edad == "" || edad == "0") {
-				datos.innerHTML = `<h5 class="text-danger">Tiene que ingresar una edad</h5>`;
+				datos.html('<h5 class="text-danger">Tiene que ingresar una edad</h5>');
+				datos.slideDown();
 			}else if (numero.test(edad) == false) {
-				datos.innerHTML = `<h5 class="text-danger">Error la edad no puede contener caracteres alfanumericos</h5>`;
+				datos.html('<h5 class="text-danger">Error la edad no puede contener caracteres alfanumericos</h5>');
+				datos.slideDown();
 			} else if(parseInt(edad) <=16){
-				datos.innerHTML = `<h5 class="text-danger">Tiene que ingresar una edad mayor a 15</h5>`;
+				datos.html('<h5 class="text-danger">Tiene que ingresar una edad mayor a 15</h5>');
+				datos.slideDown();
 			} else if(parseInt(edad) >=100){
-				datos.innerHTML = `<h5 class="text-danger">Tiene que ingresar una edad menor a 100</h5>`;
+				datos.html('<h5 class="text-danger">Tiene que ingresar una edad menor a 100</h5>');
+				datos.slideDown();
 			}
 			
 			
 			
-			datos = $("#idDivDni")[0];
-			datos.innerHTML = ` `;
+			datos = $("#idDivDni");
+			datos.slideUp();
+			datos.html('');
 			if (dn == "" || dn == "0") {
-				datos.innerHTML = `<h5 class="text-danger">Tiene que ingresar una dni</h5>`;
+				datos.html('<h5 class="text-danger">Tiene que ingresar una dni</h5>');
+				datos.slideDown();
 			} else if (numero.test(dn) == false) {
-				datos.innerHTML = `<h5 class="text-danger">Error el dni no puede contener caracteres alfanumericos</h5>`;
+				datos.html('<h5 class="text-danger">Error el dni no puede contener caracteres alfanumericos</h5>');
+				datos.slideDown();
 			} else if(parseInt(dn) >100000000 || parseInt(dn) <9999999){
-				datos.innerHTML = `<h5 class="text-danger">Tiene que ingresar una dni de 8 cifras</h5>`;
+				datos.html('<h5 class="text-danger">Tiene que ingresar una dni de 8 cifras</h5>');
+				datos.slideDown();
 			}
 		}
 		return false;

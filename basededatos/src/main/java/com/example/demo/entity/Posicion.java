@@ -24,7 +24,7 @@ public class Posicion implements Serializable {
 	public Posicion(int idPosicion, String nombre, boolean atrasadoAdelantado) {
 		super();
 		this.idPosicion = idPosicion;
-		this.nombre = nombre;
+		this.nombre = nombre.trim();
 		this.atrasadoAdelantado = atrasadoAdelantado;
 	}
 	

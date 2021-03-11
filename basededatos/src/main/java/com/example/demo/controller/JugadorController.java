@@ -23,6 +23,10 @@ import com.example.demo.service.PosicionService;
 @Controller
 @RequestMapping("/jugador")
 public class JugadorController {
+	private static final int NINGUN_EQUIPO = 15;
+
+	private static final String JUGADOR_KEY = "jugador";
+
 	@Autowired
 	@Qualifier("JugadorService")
 	private JugadorService jugadorService;
@@ -50,7 +54,7 @@ public class JugadorController {
 		mav.addObject("consultoPorEquipo", idPosicion==-1);
 		mav.addObject("consultoPorPosicion", idEquipo == -1);
 		mav.addObject("consultaPorUnoSolo", idEquipo == -1 || idPosicion == -1);
-		mav.addObject("noTieneEquipoNiPosicion", idEquipo == 15 && idPosicion == 24);
+		mav.addObject("noTieneEquipoNiPosicion", idEquipo == NINGUN_EQUIPO && idPosicion == 24);
 		if(idPosicion!=-1) mav.addObject("nombrePosicion", posicionService.listarId(idPosicion).get().getNombre());
 		if(idEquipo!=-1) mav.addObject("nombreEquipo", EquipoService.listarId(idEquipo).get().getNombre());
 		mav.addObject("jugadores", listAllJugador(listJuga));
@@ -58,12 +62,12 @@ public class JugadorController {
 	}
 	//tranformo una lista de jugadores en una lista de JugadorAdapter
 	public List<JugadorAdapter> listAllJugador(List<Jugador> list) {
-		return JugadorAdapter.createListOfAdapters(list);
+		return JugadorAdapter.createListOfAdapters(list,posicionService.listAllPosicion(),EquipoService.listAllEquipo());
 	}
 	//spring.jpa.hibernate.ddl-auto=update
 	@GetMapping("/new")
 	public String agregar(Model model) {
-		model.addAttribute("jugador", new Jugador());
+		model.addAttribute(JUGADOR_KEY, new Jugador());
 		return "formJugador";
 	}
 
@@ -81,7 +85,7 @@ public class JugadorController {
 	@GetMapping("/editar/{idJugador}")
 	public String editar(@PathVariable int idJugador, Model model) {
 		Optional<Jugador> jugador = jugadorService.listarId(idJugador);
-		model.addAttribute("jugador", jugador);
+		model.addAttribute(JUGADOR_KEY, jugador);
 		return "formJugador";
 	}
 
@@ -93,7 +97,7 @@ public class JugadorController {
 
 	@GetMapping("/traerJEP")
 	public String agegar2(Model model) {
-		model.addAttribute("jugador", new Jugador());
+		model.addAttribute(JUGADOR_KEY, new Jugador());
 		return "formEP";
 	}
 

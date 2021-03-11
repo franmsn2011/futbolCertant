@@ -21,20 +21,20 @@
 <body id="idFondo"
 	background="https://img.fifa.com/image/upload/t_l1/dq6tczszvf4ebburt5b8.jpg">
 	<div class="card-title bg-white">
-	<div th:if="${consultaPorUnoSolo == true}">
-		<h2 th:if="${consultoPorPosicion == true}">
+	<div th:if="${consultaPorUnoSolo}">
+		<h2 th:if="${consultoPorPosicion}">
 			Estos son los jugadores que tiene la posicion <span
 				th:text="${nombrePosicion}"></span>
 		</h2>
-		<h2 th:unless="${consultoPorPosicion == true}">
+		<h2 th:unless="${consultoPorPosicion}">
 			Estos son los jugadores que tiene el equipo <div
 				th:text="${nombreEquipo}"></div>
 		</h2>
 	</div>
-	<div th:unless="${consultaPorUnoSolo == true}">
-		<h2 th:if="${noTieneEquipoNiPosicion== true}">Estos son los
+	<div th:unless="${consultaPorUnoSolo}">
+		<h2 th:if="${noTieneEquipoNiPosicion}">Estos son los
 			jugadores que no tiene ningun equipo y posicion</h2>
-		<h2 th:unless="${noTieneEquipoNiPosicion== true}">
+		<h2 th:unless="${noTieneEquipoNiPosicion}">
 			Estos son los jugadores que tiene la posicionnnnn <span
 				th:text="${nombrePosicion}"></span><span> y el juegan en el equipo</span> <span
 				th:text="${nombreEquipo}"></span>

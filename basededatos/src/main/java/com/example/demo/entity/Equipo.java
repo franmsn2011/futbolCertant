@@ -26,8 +26,8 @@ public class Equipo implements Serializable {
 	public Equipo(int idEquipo, String nombre, String division) {
 		super();
 		this.idEquipo = idEquipo;
-		this.nombre = nombre;
-		this.division = division;
+		this.nombre = nombre.trim();
+		this.division = division.trim();
 	}
 
 	public int getIdEquipo() {
